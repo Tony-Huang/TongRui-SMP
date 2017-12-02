@@ -1,0 +1,20 @@
+ADF UI study notes
+
+AJAX- Asynchronous JavaScript And Xml.客户机与服务端只交换一小部分数据，以便提高响应时间。
+
+ADF PPR-ADF Partial Page Rendering.PPR只会提交一部分相关组件状态到后台，因此JSF页面请求生命周期只会适用于部分组件（界面控件），这种生命周期称为优化生命周期。
+
+PPR事件根组件 :触发PPR事件的源。 PPR事件发生时，它以及子组件都经受PPR的优化生命周期（页面其他内容并不提交）.比如showDetail, Tree, Table
+PPR事件边界组件:PPR事件发生时，它以及它边界内组件都经受PPR的优化生命周期.比如，popup,etc.
+
+
+触发组件(trigger component)和监听组件(listen component):
+触发组件是发出事件的源头组件，包括事件根组件和事件边界组件(他们有autoSubmit或者partialSubmit属性)，监听组件是依赖触发组件的组件(它们有partialTriggers属性)。
+比如想要按下一个按钮后，跟按钮相关的参数局部提交,然后引起表格的局部刷新.那么按钮就是触发组件，表格就是监听组件。需要设置按钮的partialSubmit属性为true，并且设置
+表格的partialTriggers属性为按钮的id. 这样一来按钮和表格都经历局部优化的PPR页面请求生命周期，从而局部刷新（按钮和表格）而不是刷新整个页面。
+
+
+
+
+
+ 

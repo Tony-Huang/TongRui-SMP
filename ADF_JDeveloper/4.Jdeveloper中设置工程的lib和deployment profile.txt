@@ -1,0 +1,8 @@
+1.library:
+打开jdeveloper, 右击选中工程-》project properties->library and classpath. 
+
+2. 设置工程的部署类型：
+打开jdeveloper, 右击选中工程-》project properties->Deployment
+ 2.1 增加一个deployment profile (略)
+ 2.2 改变一个webapp的lib:
+        在窗口Edit WAR Deployment Profile Properties->File Groups->WEB-INF/lib/Contributors

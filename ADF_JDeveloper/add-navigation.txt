@@ -1,0 +1,55 @@
+navigation
+
+
+
+original：
+
+     <f:facet name="center">  
+	 
+      <af:decorativeBox theme="default" id="ptdb2"   centerLandmark="main" dimensionsFrom="parent"  inlineStyle="background-color:ButtonHighlight;">          
+                   <f:facet name="center">
+                     <af:facetRef facetName="center1"/>                                        
+                   </f:facet>
+      </af:decorativeBox>
+	  
+    </f:facet>
+                            
+
+1.
+  <af:panelSplitter orientation="horizontal" splitterPosition="106" id="ps1">
+                    <f:facet name="first"/>
+                    <f:facet name="second"/>
+                </af:panelSplitter>
+				
+				
+				
+				  <af:panelSplitter orientation="horizontal" splitterPosition="106" id="ps1">
+                    <f:facet name="first"/>
+					
+					 <f:facet name="second"/>   
+					 
+					 <f:facet name="second"/>  
+
+                    </af:panelSplitter>	
+
+2.
+                     <af:menu text="数据分析" id="m1">
+                        <af:commandMenuItem text="工艺品种查询机台" id="m6" action="#{GlobalMenu.gongYiPingZhongChaJiTai}"/>
+                        <af:commandMenuItem text="不同班次时间对比" id="m7" action="#{GlobalMenu.buTongJiTaiShiJian}"/>
+                        <af:commandMenuItem text="不同机台数据对比" id="m8" action="#{GlobalMenu.buTongjiTaiShuJu}"/>
+                        <af:commandMenuItem text="机台时间段统计数据" id="m9" action="#{GlobalMenu.jiTaiShiJianDuanTongJI}"> </af:commandMenuItem>
+                        
+                        <af:commandMenuItem text="所有机台统计数据" id="m10"  action="#{GlobalMenu.suoYouJiTaiTongJi}"/>
+                        <af:commandMenuItem text="纱型段断头率对比" id="m11"   action="#{GlobalMenu.shaXingDuanDuanTouLv}"/>
+                       
+                     </af:menu>		
+
+====》
+        inlineStyle="font-size:large;"            
+                                <af:navigationPane hint="list" id="pt_np1">
+                                                <af:commandNavigationItem id="ni1"    inlineStyle="font-size:large;"     text="工艺品种查询机台"/>
+                                                 <af:commandNavigationItem id="ni2"     text="不同班次时间对比"/>
+                                                  <af:commandNavigationItem id="ni3"      text="不同机台数据对比"/>
+                                                 <af:commandNavigationItem id="ni4"      text="机台时间段统计数据"/>
+                                                 <af:commandNavigationItem id="ni5"    text="纱型段断头率对比"/>
+                                </af:navigationPane>					 

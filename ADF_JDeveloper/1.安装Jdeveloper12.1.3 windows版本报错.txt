@@ -1,0 +1,5 @@
+可以尝试安装jdeveloper 12.1.3的jar包：
+
+java -jar -jdev_suite_121300.jar
+
+此jar包可从oracle website下载（下载前先在 oracle网站www.oracle.com注册一个账号）。

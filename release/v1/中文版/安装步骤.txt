@@ -1,0 +1,21 @@
+1.安装Oracle JDK7或以上版本,安装完后设置系统环境变量java_home.如果以前已经安装此步可忽略，检查java_home环境变量是否设定即可。
+1.1) JDK7下载地址:http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html
+注意选择根据你的计算机操作系统和位数选择版本。比如Windows 64位要装JDK7u80，选择jdk-7u80-windows-x64.exe 下载
+1.2) 设置java_home环境变量: 电脑->属性->高级系统设置->高级->环境变量， 系统变量部分->新建. 名字为java_home 值为jdk的安装目录
+
+2.安装MySql5.6
+
+3.安装tomcat7或以上版本
+
+在注释部分(rem)之后加上下面这一行:
+set  CATALINA_OPTS=-Xmx2648m
+
+
+4.在MySql上运行如下文件.
+quartz.sql
+schema.sql
+
+5.将SMPUI.war 放到 tomcat/webapps目录下
+
+6.启动tomcat.运行tomcat/bin/目录下的startup即可
+

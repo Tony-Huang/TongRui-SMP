@@ -1,0 +1,250 @@
+ADF Security framework is built on top of Oracle Platform Security Service (OPSS), which itself is
+well-integrated with Oracle WebLogic Server.
+
+ADF security与一般的Java EE的安全模型相同点在于:
+1)都要处理用户登录和登出。（认证/authentication）
+2)都要处理资源保护。(授权/authorization)
+
+
+ADF security与一般的Java EE的安全模型不同点在于：
+1)声明式。（无需编码，在jdeveloper中拖拽即成）
+2)对于ADF特有的bounded task flow有自己的authorization解决方案。ADF bounded task flow是Oracle自己对Java EE/JSF的扩展，并无Java EE标准，因此如果你使用了bounded task flow,最好用ADF Security中的Resource Grant来进行安全保护。
+3）对于底层数据模型的EO及其列的也可用ADF Security对其authorization.
+ADF Web应用，安全资源包括网页，bounded task flow, 模型中的EO和列。对传统的Java EE而言,安全资源就是传统的网页或者其对应的url.
+4) 跟Weblogic server有高度无缝的集成。
+5) ADF安全模型是对JAAS的实现而不是对Java EE安全模型的实现，即使使用ADF security来保护Web资源。
+ADF的安全是借助于OPPS实现的，而OPPS包括了对JAAS的实现。
+
+JAAS模型是基于策略(security policy)的，而Java EE安全模型是基于url匹配的安全约束(URL mapping of a security constraint)依靠Java EE容器来管理安全.
+
+
+概念：
+1.ADF的Security policy: 在ADF中Security policy指规定什么样的用户或者角色被赋予对哪些资源有哪些访问权限。
+2.identity store: the repository of user identities and login credentials
+3.ADF Security policy: 指定哪些角色可以对哪些资源进行哪些action.
+  policy store:在设计期(用Jdeveloper拖拽),是个文件。文件里的每个条目称为grant.每个grant包含2部分，一个是Application role,另一部分是Permission.permission由2部分组成，即Action和资源(也就是说permission是将action和资源关联起来).
+
+当你正式部署应用到Application server时，你使用jdeveloper在设计期
+创建的用户(user)和企业角色(Enterprise role)不会migrate到application server。这些设计期间的用户和企业角色是临时测试用的，在正式部署之前应该删掉。
+设计期间的用户和企业角色在jdeveloper运行时会被保存到integratedWLS的embedded LDAP中。
+但是设计期policy store中保存的policy（包括grant和application role）会在你正式部署应用到Application server时被migrate到目标的Application server中。之后管理员会配置应用使某种user repository(比如LDAP)来映射(map)或者填充(populate)用户到应用的Application role.
+这反映了几个基本的设计常识：1）用户是动态变化的，不可固定死 2)用户和组(或者企业角色/外部角色)是由外部定义或者提供的。App本身不定义用户。3)应用本身的安全策略和Application role基本不变，可在不同环境migration或者嵌在应用内部保持不变，外部的组或者企业角色可被映射到应用的Application role(这种映射的工作环境和工具、界面应由App的运行平台或容器来提供,比如Application Server如Weblogic,WebSphere,JBoss,etc).
+
+
+adf-share-support.jar   oracle.adf.share.security.authentication ADFRolePrinciple, ADFUserPrincipal, AuthenticationCallbackHandler, AuthenticationServiceUtil
+adf-share-security.jar  oracle.adf.share.security.authorization RegionPermission , MethodPermission
+
+
+
+ADF web UI login page:
+   ---Explicit Authentication
+          ---Login page :不可取，容易出错会有不可预测的错误.
+          ---Login link on a public welcome page:要确保success_url是view activity name not the web page name.
+   
+   ---Implicit Authentication
+         ---success_url 是目标网页的URL/web page name.
+         
+
+   ---with task flow:  
+             1)authenticated but not authorized: authorizationErrorPage.jspx, specified in the adfc-config.xml file
+             2)not authenticated:error page specified in web.xml
+  
+   ---without task flow:  specify an <init-param> setting in web.xml for the ADF binding filter
+          <filter>
+             <filter-name>adfBindings</filter-name>
+             <filter-class>oracle.adf.model.servlet.ADFBindingFilter</filter-class>
+             <init-param>
+               <param-name>unauthorizedErrorPage</param-name>
+               <param-value>faces/authorizationErrorPage.jspx</param-value>
+             </init-param>
+          </filter>
+
+
+---ADFDEv page 1593,destination for login link:----
+
+#{securityContext.authenticated ?
+&quot;/adfAuthentication?logout=true&amp;end_url=/faces/welcome&quot; :
+&quot;/adfAuthentication?success_url=/faces/welcome&quot;}
+
+login:  need to redirect to /adfAuthentication?success_url=/faces/welcome
+logout: need to redirect to /adfAuthentication?logout=true&end_url=/faces/welcome
+
+ 
+
+
+41.11.1 "Using Expression Language (EL) with ADF Security."
+
+Section 41.7.4.2, "Adding Login and Logout Links."
+
+
+SMP安全考虑：
+0) 使用Implicit authentication而不是用Explicit authentication.原因是SMP界面入口是login页面，没有public welcome page,如果非要做一个login link显得不伦不类.
+1）使用managed bean， 既包括ADF managed bean(细粒度scope控制),也包括JSF managed bean.能使用JSF managed bean时不使用ADF managed bean.
+2) 使用JSF page flow，不使用ADF task flow(bounded task flow, 或者undbouded task flow).原因是ADF task flow的认证和错误页面很麻烦（错误页面需要定义2处）。
+3）不使用JpsFilter.因为jpsfilter要查询policy store 而 tomcat不支持存在jazn-data.zml中的policy store
+4) 不适用adfBindingFilter.adfBindingFilter需要的运行环境Tomcat支持不了。
+
+
+Procedure for adding custom login page and using implicit authentication:
+1)用ADF security wizard 只使用ADF authentication,指定login page和error page .login page 和error page都用ADF RC style,不用缺省产生的login.jsp和error.jsp
+2)检查web.xml,如果ADF Faces servlet的mapping URL pattern是/faces/* 
+,那么登录页面和authentication出错页面应该是/faces/login.jspx,/faces/error.jspx
+3)检查success_url parameter as an <init-param> within the web.xml file for adfauthentication servlet.
+4)检查web.xml,不使用task flow的authenrization出错页面配置。(这步可以省略,如果能实现管理员功能的菜单和按钮置灰或不渲染。如果非要这一步，其结果是非授权用户点击后会导向到出错页面，不如不给非授权用户点击机会的体验好。)
+5)写自己的login bean.
+6）从web.xml中删除掉jpsFilter和adfbBindingFilter
+7) 所有的managen bean添加在faces-config.xml
+8) 所有的页面导航添加在faces-config.xml
+
+
+sample code for login code/logout:
+
+javax.faces.application.FacesMessage
+javax.faces.context.ExternalContext
+javax.faces.context.FacesContext
+javax.servlet.ServletException
+javax.servlet.http.HttpServletRequest
+javax.servlet.http.HttpSession
+
+
+
+//property
+private String _username;
+private String _password;
+
+public void setUsername(String _username) {
+this._username = _username;
+}
+public String getUsername() {
+return _username;
+}
+public void setPassword(String _password) {
+this._password = _password;
+}
+public String getPassword() {
+return _password;
+}
+
+//login
+
+public String doLogin() {
+2 FacesContext ctx = FacesContext.getCurrentInstance();
+3 if (_username == null || _password == null) {
+4 showError("Invalid credentials",
+5 "An incorrect username or password was specified.", null);
+6 } else {
+7 ExternalContext ectx = ctx.getExternalContext();
+8 HttpServletRequest request = (HttpServletRequest)
+9 ctx.getExternalContext().getRequest();
+10 try {
+11 request.login(_username, _password); // Servlet 3.0 login
+12 _username = null;
+13 _password = null;
+14 HttpSession session = request.getSession();
+15 session.setAttribute("success_url", "/faces" +
+16 ctx.getViewRoot().getViewId());
+17 redirect(ectx.getRequestContextPath() + "/adfAuthentication");
+18 } catch (ServletException fle) {
+19 showError("ServletException", "Login failed.
+20 Please verify the username and password and try again.", null);
+21 }
+22 }
+23 return null;
+24 }
+
+//redirect
+
+private void redirect(String forwardUrl) {
+2 FacesContext ctx = FacesContext.getCurrentInstance();
+3 ExternalContext ectx = ctx.getExternalContext();
+4 try {
+5 ectx.redirect(forwardUrl);
+6 } catch (IOException ie) {
+7 showError("IOException", "An error occurred during redirecting.
+8 Please consult logs for more information.", ie);
+9 }
+10 }
+
+
+//--show error
+private void showError(String errType, String message, Exception e){
+FacesMessage msg =
+new FacesMessage(FacesMessage.SEVERITY_ERROR, errType, message);
+FacesContext.getCurrentInstance().addMessage("d2:it35", msg);
+if (e != null) {
+e.printStackTrace();
+}
+}
+
+
+//----logoff
+public String logoff() {
+FacesContext ctx = FacesContext.getCurrentInstance();
+ExternalContext ectx = ctx.getExternalContext();
+HttpServletRequest httpRequest = (HttpServletRequest) ectx.getRequest();
+try {
+httpRequest.logout(); // Servlet 3.0 logout
+HttpSession session = httpRequest.getSession(false);
+if (session != null) {
+session.invalidate();
+}
+String logoutUrl = ectx.getRequestContextPath() + "/faces" +
+ctx.getViewRoot().getViewId();
+redirect(logoutUrl);
+} catch (ServletException e) {
+showError("ServletException", "An error occurred during logout.
+Please consult logs for more information.", e);
+}
+return null;
+}
+
+
+--------use logout link:
+<af:link text="#{securityContext.authenticated ? &quot;Logout&quot; : &quot;Login&quot;}"
+destination="#{securityContext.authenticated ?
+&quot;/adfAuthentication?logout=true&amp;end_url=/faces/welcome&quot; :
+&quot;/adfAuthentication?success_url=/faces/welcome&quot;}"
+inlineStyle="color:Blue; font-size:14px; font-weight:bold;"/>
+
+
+为什么要删掉jpsFilter和adfbindingFilter:
+adfBindingFilter过滤的是adfauthentication servlet (url mapping是/adfauthentication),意味着请求到达adfauthentication servlet之前会被adfBindingFilter过滤.
+
+jpsfilter的过滤的url是/faces/* 也就是ADF所有页面（会被faces servlet处理的页面）,这意味着任何对/faces/*(或/faces/*.jspx,/faces/public/page1, /faces/protected/adminpage....)页面的请求到达到faces servlet之前会被jpsFilter过滤.
+
+用户访问资源时，先被jpsFilter拦截，jpsFilter会进行如下逻辑处理：
+1） 检查policy store查看被访问资源是否被保护，如果否则放行，如果是
+
+ 则检查用户是否被认证 (读取ADFSecuritycontext,ADFSecuritycontext未初始化会发现相应项(用户名，角色等 )为空).
+ 1.1 如果用户未被认证则 ：
+ 1.1.1）用户请求转发到/adfauthentication以便被adfauthenticationservlet处理,而用户请求被adfauthenticationservlet处理之前会被adfBindingFilter拦截。adfbinding会初始化ADFSeciritycontext(将用户名和拥有角色放入session,并提供可用的ADFSecurityContext ＡＰＩ(比如查询用户是否被认证，用户是否拥有某个角色),如果是匿名用户则username,roles 都为 null，zuthenticated=false),再把用户请求导向到adfauthentication servlet 而adfauthentication url是由security-constraint限制的EE 容器保护资源，从而触发web容器将用户请求导向到登录界面.
+ 1.1.2  用户输入用户名密码，提交（/faces/login.jspx）后，先被jpsFilter拦截住,jps检查policy store发现登陆界面不是受保护资源所以放行.
+    接着后台login处理代码认证用户，如果认证成功则，用户请求再被定向到adfauthentication servlet,
+ 1.1.3这时候请求再次(在到达adfauthentication servlet前)被adfBingingFilter拦截，adfBindingFilter重新初始化ADFSecurityContext(填入用户名，角色，是否认证等)    再将用户请求放行交给 adfauthentication servlet，adfauthentication servlet再根据之前login处理代码传入的参数success_url(即用户意图访问网页),将用户求转发到
+ success_url(比如 /faces/main.jspx),这时jpsFilter(可拦截任何/faces/*)又拦截住请求,检查用户权限check zuthorization (读policy store,看看用户访问资源所允许的角色跟用户拥有的角色是否匹配)，如果用户有权访问，则放行，继续交给faces servlet处理从而产生炫酷的页面内容，如果无权访问则将用户导向到出错页面.
+ 1.2 如果用户已经认证:
+ 1.2.1 检查权限
+      如果有权限，放行。
+      如果无权限，导到出错页面.
+
+
+jpsFilter过滤器在adfBindingFilter之前.
+
+可见jpsFilter主要做5件事：
+1）读pageDef查看用户访问的url所对应的资源(java类和XML文件)
+2) 读policy store(jazn-data.xml或者system-jazn-data.xml)查看资源可被哪些哪些角色访问
+3) 读ADFSecuritycontext获取当前用户名和用户拥有角色
+4) 检查当前用户拥有的角色和访问的资源所允许的角色和权限是否匹配
+5) 基于检查结果重定向、转发用户请求
+
+adfBindingFilter主要做2件事:
+1) 初始化ADFSecurityContext
+2) 转发请求到adfauthentication servlet
+
+adfauthentication servlet主要职责：
+1) 触发容器将用户请求导向到登录页面(将adfauthentication servlet配置到security-constraints)。
+2）转发用户请求到初始url
+
+
+基于以上认识，在Tomcat容器使用ADF时不需要jpsFilter和adfbindingFilter的原因是tomcat不支持jazn-data.xml格式的policy store,不具备jpsFilter运行的环境
+tomcat无法提供adfBindingFilter的运行环境(adfBindingfilter还需要adfmodle支持，与我们设计初衷相悖)

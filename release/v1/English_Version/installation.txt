@@ -1,0 +1,24 @@
+1.Install Oracle JDK 7 or above version, then set the system environment variable of java_home. Please skip this if you already installed jdk7 or above before, however you need to check the java_home environment variable.
+ 
+1.1)download site:http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html 
+You need to select the jdk version to download by your computer's OS and bit. Such as you can download jdk-7u80-windows-x64.exe if
+your computer OS is Windows and 64 bit.
+1.2)Set the java_home environment variable. Computer->Properties->Advanced System Setting->Advanced->Environment Variable, System variable->click New button, with name being java_home and value being the installation folder of JDK.
+
+
+2.install MySql5.6
+
+3.install tomcat 7 or above version
+
+Add following line after the comments section in tomcat/bin/catalina.bat:
+set  CATALINA_OPTS=-Xmx2648m
+
+
+4.Run following sql files on MySql Workbench UI.
+quartz.sql
+schema.sql
+
+5.Put SMPUI.war under tomcat/webapps
+
+6.To start tomcat.Run tomcat/bin/startup.bat
+

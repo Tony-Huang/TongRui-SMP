@@ -1,0 +1,18 @@
+1.修改 C:\Users\${username}\AppData\Roaming\JDeveloper\${jdevVersion}\product.conf
+比如，C:\Users\dphuang\AppData\Roaming\JDeveloper\12.1.3.0.0\product.conf
+
+Add the following to end of the file:
+
+Add64VMOption -Xmx2048m
+
+--或者Add64VMOption -Xmx1024m 如果你的机器内存不大。
+
+2.jdeveloper运行一段时间会报内存不够然后僵住， 原来的MaxPermsize默认是320M,提示你修改。
+修改C:\oracle\Middleware\Oracle_Home\jdeveloper\jdev\bin\jdev.conf (C:\oracle\Middleware\Oracle_Home\jdeveloper是jdeveloper安装目录，根据你的情况修改)
+
+修改原来的AddVMOptionHotspot  -XX:MaxPermSize=320M 为如下:
+AddVMOptionHotspot  -XX:MaxPermSize=512M
+
+并把下列加到jdev.conf文件末尾(可以根据你的情况调大或调小)
+AddVMOption -Xmx786M
+AddVMOption -Xms786M

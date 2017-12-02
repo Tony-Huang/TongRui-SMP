@@ -1,0 +1,2 @@
+将Oracle ADFEssential下载后解压。将里面所有的jar包全部放到Tomcat/lib下。
+注意的是ADFEssential解压后里面有目录层级，要剥除目录直接把所有jar包放到Tomcat/lib下。

@@ -1,0 +1,38 @@
+
+一. 登录
+登录前，请打开浏览器并设置你的语言。
+
+1. Firefox:
+Tools -> Options -> Content -> Language
+
+2. Chrome:
+Settings -> Show advanced settings -> Languages -> Language and input settings
+  
+3. IE:
+Internet options -> General -> Language ,选择语言，如果没有则选ADD,然后移至顶端
+
+4.搜狗浏览器
+显示菜单-> 选项 -> 右上方Internet选项 -> 下方Language -> 选择你的语言 如果没有则添加
+
+登录时网址: http://ip:port/SMPUI/faces/login.jspx (具体的ip和port请查看机器配置和tomcat/conf/server.xml)
+一般可用    http://localhost:8080/SMPUI/faces/login.jspx
+
+管理员默认登录账号：  用户名admin001,密码admin001，管理员登录后建议立即更改密码并添加其他用户.
+连续输错5次密码，账号会被锁定，30分钟内不能登录。
+
+二。系统配置。
+1.先在系统设定->机台配置界面添加机台.并保证ip,端口号和显示屏ID都正确，而且通讯测试正常。
+2.在系统设定->原料代码界面添加原料名称和代码映射。
+
+
+二.查看机台运行和所有机台运行。
+
+1.实时机台运行:输入机台编号，按确定按钮。
+  查看锭子速度:输入锭号，可查看临近50个锭子速度
+2.所有机台实时运行：点击所有机台运行
+
+三。查看对比数据
+此为傻瓜操作，根据界面输入或选择即可。 若无数据，请仔细检查输入条件。
+
+
+
