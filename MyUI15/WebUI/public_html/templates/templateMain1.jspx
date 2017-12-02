@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <af:pageTemplateDef var="attrs" definition="private">
+        <af:xmlContent>
+            <component xmlns="http://xmlns.oracle.com/adf/faces/rich/component">
+                <description/>
+                <display-name>templateMain1</display-name>
+                <facet>
+                    <facet-name>center1</facet-name>
+                </facet>
+                <facet>
+                    <facet-name>center2</facet-name>
+                </facet>
+              
+             
+                <attribute>
+                    <attribute-name>logoImagePath</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+                <attribute>
+                    <attribute-name>logoSmallImagePath</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+                <attribute>
+                    <attribute-name>logoStyleClass</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+                <attribute>
+                    <attribute-name>logoShortDesc</attribute-name>
+                    <attribute-class>java.lang.String</attribute-class>
+                </attribute>
+            
+            </component>
+        </af:xmlContent>
+     
+     
+       <af:form id="f1" inlineStyle="background-color:ButtonHighlight;">
+        <af:panelSplitter orientation="vertical" splitterPosition="30" id="ps1" >
+        
+         <f:facet name="first">
+          <af:panelGroupLayout layout="scroll" id="ptpgl1" styleClass="AFBrandingBar"
+                               inlineStyle="background-color:ThreeDDarkShadow;">
+            <f:subview id="about">
+              <jsp:include page="/includes/aboutPopup.jspx"/>
+            </f:subview>
+            <af:panelBorderLayout id="ptpbl1">
+              <f:facet name="start">
+                <af:panelGroupLayout styleClass="AFBrandingBarItem" id="ptpgl2">
+                  <af:link id="logoLink" action="index" icon="/igms/logo-small.jpg" styleClass="AFBrandingLogo"
+                           shortDesc="#{webuiBundle['product.logo.shortDesc']}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="innerStart">
+                <af:panelGroupLayout styleClass="AFBrandingBarItem"
+                                     id="ptpgl3" layout="horizontal">
+                 <af:spacer width="10" id="pts-prodname"/>
+                  <af:outputText styleClass="AFBrandingBarTitle"
+                                 id="ptot1" value="#{webuiBundle['product.name']}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <af:panelBorderLayout id="ptpbl2">
+                <af:spacer inlineStyle="max-width:80%;" id="mysp-top-sp001" styleClass="AFStretchWidth"/>
+                <f:facet name="end">
+                  <af:panelGroupLayout layout="horizontal" styleClass="AFBrandingBarItem"
+                                       id="ptpgl4">
+                     <af:outputLabel value="#{webuiBundle['user.profile.welcome.name']}" id="pt_ol1"
+                                     inlineStyle="font-size:large; color:White;"/>
+                       
+                        <af:link text="#{UserProfile.username}" id="pt_l1" inlineStyle="font-size:large; color:Blue;"
+                                 action="#{Login.go2UserProfile}"/>
+                        <af:spacer width="50" height="10" id="pt_s1"/>
+                    
+                     <af:navigationPane hint="tabs" id="ptnp1">
+                       <af:commandNavigationItem text="#{webuiBundle['logout.name']}"
+                                                shortDesc="#{webuiBundle['logout.desc']}"
+                                                id="ptcni02"
+                                               action="#{Login.logoff}"/>
+                       <af:spacer width="50" height="10" id="pt_s2"/>
+                     
+                     
+                       <af:commandNavigationItem text="#{webuiBundle['product.about.name']}"
+                                                shortDesc="#{webuiBundle['product.about.tips']}"
+                                                id="ptcni1" styleClass="AFBrandingBarTitle">
+                        <af:showPopupBehavior popupId="::about:about"/>
+                       </af:commandNavigationItem>
+                    
+                    </af:navigationPane>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelBorderLayout>
+              <f:facet name="innerEnd">
+                <af:spacer width="4" id="pts2"/>
+              </f:facet>
+              <f:facet name="end">
+                <af:panelGroupLayout layout="horizontal" styleClass="AFBrandingBarItem"
+                                     id="ptpgl5">
+                  <af:statusIndicator id="ptsi1"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelBorderLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        
+                                 
+        <f:facet name="second">
+          <af:panelSplitter orientation="vertical" positionedFromEnd="true" splitterPosition="79" id="ps2"
+                                         >
+           <f:facet name="first">
+           <!---added by tony for nav-experiment -->
+               <af:panelSplitter orientation="horizontal" splitterPosition="5" id="ps1-nav">
+                    <f:facet name="first">  
+                    </f:facet>
+                     <f:facet name="second">
+           
+            <af:decorativeBox topHeight="10px"
+                                id="ptdb-bodyCenter" dimensionsFrom="auto" theme="contentBody">
+                                
+              <f:facet name="center">
+                <af:decorativeBox topHeight="10px"   id="ptdbbody-center" dimensionsFrom="auto">
+                         <f:facet name="center">
+                        
+                        <af:panelStretchLayout startWidth="10px" id="ptpsl2"
+                                                     dimensionsFrom="auto" topHeight="30px">
+                                <f:facet name="top">
+                                 
+                                   <af:toolbox id="t1" >
+                <af:menuBar id="mb1" inlineStyle="font-size:large;">
+                   
+                    
+                    <af:menu text="#{webuiBundle['main.menu.rt']}" id="m2" inlineStyle="font-size:large;">
+                        <af:commandMenuItem  text="#{webuiBundle['main.menu.rt.station']}" id="cmi92"  action="#{GlobalMenu.viewStationRTdata}"    inlineStyle="font-size:large;"/>
+                         <af:commandMenuItem text="#{webuiBundle['main.menu.rt.allst']}" id="cmi922"  action="#{GlobalMenu.allStationRealtimeRunning}"  inlineStyle="font-size:large;"/>
+                    </af:menu>
+                    <af:menu text="#{webuiBundle['main.menu.users']}" id="m3" inlineStyle="font-size:large;" >
+                        <af:commandMenuItem text="#{webuiBundle['main.menu.users.browse']}" id="cmi12"    action="#{GlobalMenu.browseUsers}"  inlineStyle="font-size:large;"/>
+                        <af:commandMenuItem text="#{webuiBundle['main.menu.users.add']}" id="cmi10"  action="#{GlobalMenu.addUser}"   inlineStyle="font-size:large;"/>
+                    </af:menu>
+                    <af:menu text="#{webuiBundle['main.menu.syssetting']}" id="m4"  inlineStyle="font-size:large;">
+                        <!--af:commandMenuItem text="工艺品种" id="cmi11" action="#{GlobalMenu.gongYiPinZhong}"   inlineStyle="font-size:large;"/-->
+                    
+                        <af:commandMenuItem text="#{webuiBundle['main.menu.syssetting.stationmgt']}" id="m5"  action="#{GlobalMenu.browseMonitors}"   inlineStyle="font-size:large;"   />
+                            <!--af:commandMenuItem text="增加机台" id="cmi14" action="#{GlobalMenu.newMonitor}"/>
+                            <af:commandMenuItem text="浏览机台" id="cmi15" action="#{GlobalMenu.browseMonitors}"/>
+                        </af:menu-->
+                         <af:commandMenuItem text="#{webuiBundle['main.menu.syssetting.materialcode']}" id="cmi16" action="#{GlobalMenu.yuanLiaoDaiMa}"   inlineStyle="font-size:large;"   />
+                         <af:commandMenuItem text="#{webuiBundle['module.name.bigscreen']}" id="cmi19" action="#{GlobalMenu.bigScreenConfig}"   inlineStyle="font-size:large;"   />
+                          <af:commandMenuItem text="#{webuiBundle['module.name.cat.list']}" id="cmi192" action="#{GlobalMenu.catName}"   inlineStyle="font-size:large;"   />
+                         
+                         <af:commandMenuItem text="#{webuiBundle['main.menu.syssetting.deviceparam']}" id="cmi17" action="#{GlobalMenu.gongYiCanShu}"   inlineStyle="font-size:large;" disabled="true"/>
+                       
+                        <!--af:commandMenuItem text="数据采集频率" id="cmi13"  /-->
+                                            
+                                            
+                    </af:menu>
+                </af:menuBar>
+            </af:toolbox>
+                                 
+                                </f:facet>
+                                
+                                
+            <f:facet name="center">
+                    <af:panelSplitter id="pt_ps1" splitterPosition="200">
+                        <f:facet name="first">
+                         
+                                <af:decorativeBox theme="medium" id="ptdb2-1"   centerLandmark="main" dimensionsFrom="parent"  inlineStyle="background-color:ButtonHighlight;">          
+                                   <f:facet name="center">
+                                    <af:panelGroupLayout id="pt_pgl1">
+                                     <af:spacer width="5" height="30"       id="pt_s3"/>
+                                     <af:navigationPane hint="list" id="pt_np1">
+                                                <af:commandNavigationItem id="ni1"   inlineStyle="font-size:large;"     text="#{webuiBundle['main.link.stationbycat']}"  action="#{GlobalMenu.gongYiPingZhongChaJiTai}" />
+                                                <af:commandNavigationItem id="ni2"   inlineStyle="font-size:large;"     text="#{webuiBundle['main.link.shiftcompare']}"  action="#{GlobalMenu.buTongJiTaiShiJian}"  />
+                                                <af:commandNavigationItem id="ni3"   inlineStyle="font-size:large;"     text="#{webuiBundle['main.link.stationcompare']}"  action="#{GlobalMenu.buTongjiTaiShuJu}"  />
+                                                <af:commandNavigationItem id="ni4"   inlineStyle="font-size:large;"     text="#{webuiBundle['main.link.stationperiodstatis']}"  action="#{GlobalMenu.jiTaiShiJianDuanTongJI}" />
+                                                <af:commandNavigationItem id="ni5"   inlineStyle="font-size:large;"     text="纱型段断头率对比" action="#{GlobalMenu.shaXingDuanDuanTouLv}"
+                                                                           rendered="false"/>
+                                                <af:commandNavigationItem id="ni402" inlineStyle="font-size:large;" text="#{webuiBundle['main.link.allstation.statis']}"  action="#{GlobalMenu.suoYouJiTaiTongJi}" />
+                                                 <!--af:separator id="pt_s4"/-->
+                                                <af:commandNavigationItem id="navseperator" inlineStyle="font-size:large;"  text="---------------------"  />
+                                                
+                                                <af:commandNavigationItem id="ni6"    inlineStyle="font-size:large;"   text="#{webuiBundle['main.link.station.running']}" action="#{GlobalMenu.viewStationRTdata}"  />
+                                                <af:commandNavigationItem id="ni7"    inlineStyle="font-size:large;"   text="#{webuiBundle['main.link.allstation.running']}" action="#{GlobalMenu.allStationRealtimeRunning}"  />
+                                    </af:navigationPane>	
+                                    
+                                    </af:panelGroupLayout>
+                                   
+                                  </f:facet>
+                                 </af:decorativeBox>
+                        </f:facet>
+                                                                
+                        <f:facet name="second">
+                          <af:decorativeBox theme="medium" id="ptdb2"   centerLandmark="main" dimensionsFrom="parent"  inlineStyle="background-color:ButtonHighlight;">          
+                                <f:facet name="center">
+                                     <af:facetRef facetName="center1"/>                                        
+                                 </f:facet>
+                            </af:decorativeBox>                              
+                          </f:facet>
+                      </af:panelSplitter>
+
+                   </f:facet>
+               
+                           </af:panelStretchLayout>
+                         </f:facet>
+
+                </af:decorativeBox>
+              </f:facet>
+
+            </af:decorativeBox>
+                <!--added by tony-->
+                   </f:facet>
+              </af:panelSplitter>
+           </f:facet>
+           
+           
+           <f:facet name="second">
+                 <af:facetRef facetName="center2"/>
+           </f:facet>
+           
+           </af:panelSplitter>
+        </f:facet>
+      </af:panelSplitter>
+     </af:form>
+     
+    
+    </af:pageTemplateDef>
+</jsp:root>

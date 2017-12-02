@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <!--c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle']}"/-->
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['module.name.cat.list']}" id="d1">
+        
+         <af:resource type="javascript">
+        /**
+         * Resets the field shwoing the dialog event status.
+         */
+        function resetEventStatus(event)
+        {
+          _setStatus(event, "Dialog event results will appear here.");
+        }
+
+        /**
+         * Handles a dialog event
+         */
+        function buttonClicked(event)
+        {
+          _setStatus(
+            event,
+            (new Date()) + " - A dialog button was clicked: " + event.getOutcome());
+        }
+
+        function _setStatus(event, status)
+        {
+          var resultComponent = event.getSource().findComponent("dialogEventResult");
+          if (resultComponent == null)
+          {
+            AdfLogger.LOGGER.severe("Dialog page error - trouble finding the resultComponent");
+          }
+          else
+          {
+            resultComponent.setValue(status);
+          }
+        }
+      </af:resource>
+
+        
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                                <!--af:subform id="catNV">
+                                    <jsp:include page="/includes/catName.jspx"/>
+                                </af:subform-->
+                                <!--af:popup  id="catPop" contentDelivery="lazyUncached" animate="true" eventContext="launcher">
+                                   
+                                    <af:panelWindow id="pw1" modal="true">
+                                        <af:panelGroupLayout id="pgl223" layout="vertical" halign="center">
+                                            <af:outputLabel id="ol1" value="#{webuiBundle['cat.name']}"   inlineStyle="font-size:large; font-weight:bolder;"/>
+                                            <af:spacer width="10" height="30" id="s2"/>
+                                
+                                          <af:panelFormLayout id="pfl1">           
+                                              <f:facet name="footer">
+                                                  <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                    <af:button text="#{webuiBundle['button.ok.name']}" id="b1"   actionListener="#{CategoryMappingList.insert}"/>
+                                                    <af:spacer width="30" height="10" id="s1"/>
+                                                  <af:button text="#{webuiBundle['button.cancel.name']}" id="b2" action="back"  immediate="true"/>
+                                            </af:panelGroupLayout>
+                                            </f:facet>
+                                            <af:inputText label="Name" id="it1" value="#{CategoryMappingList.name}"/>
+                                            <af:inputText label="Value" id="it2" value="#{CategoryMappingList.value}"/>
+                                        </af:panelFormLayout>
+                                    </af:panelGroupLayout>
+                                    </af:panelWindow>
+                                   
+                                </af:popup-->
+                              
+                              
+                                <af:outputLabel id="ol12" value="#{webuiBundle['module.name.cat.list']}"
+                                  inlineStyle="font-size:large; font-weight:bolder;"/>
+                                 <af:spacer width="10" height="30" id="s21"/>
+                                 
+                                <af:panelGroupLayout id="pgl32">
+                                    <!--af:button text="#{webuiBundle['button.add']}" id="b11" immediate="true" action="add">
+                                        <af:clientListener method="resetEventStatus" type="action"/>
+                                    </af:button-->
+                                    
+                                    <af:button text="#{webuiBundle['button.update']}" id="b33" actionListener="#{SystemSetting.updateCat}"/>
+                                    
+                                    <!--af:button text="#{webuiBundle['button.delete']}" id="b22" actionListener="#{SystemSetting.deleteCat}"/-->
+                                </af:panelGroupLayout>
+                                <af:panelCollection id="pc1" inlineStyle="width:600px;">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table var="row" rowBandingInterval="1" id="t2"
+                                              value="#{CategoryMappingList}" rowSelection="single"
+                                              columnSelection="single" editingMode="clickToEdit"
+                                              partialTriggers=" :::b33"
+                                              binding="#{SystemSetting.catMappingTable}">
+                                              
+                                         <af:column sortable="false" headerText="" id="c00" width="20">
+                                            <af:image id="i1" source="#{row.cat.imgSrc}"/>
+                                         </af:column>
+                                              
+                                         <af:column sortable="true" sortProperty="NO"
+                                                    headerText="#{webuiBundle['label.station']}" id="c1" width="80">
+                                            <af:outputText value="#{row.NO}" id="ot1"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" sortProperty="cat.name"  headerText="#{webuiBundle['cat.name']}" id="c5"
+                                                   width="120">
+                                            <af:inputText value="#{row.cat.name}" id="ot5"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" sortProperty="cat.startDate"
+                                                   headerText="#{webuiBundle['cat.startDate']}" id="c9" width="140">
+                                            <af:inputText value="#{row.cat.startDate}" id="ot9">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" sortProperty="cat.updateDateTlow"
+                                                    headerText="#{webuiBundle['cat.updateDate']}" id="c11" width="140">
+                                            <af:outputText value="#{row.cat.updateDateTlow}" id="ot11">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" sortProperty="cat.value"
+                                                    headerText="#{webuiBundle['cat.value']}" id="c13" width="60">
+                                            <af:outputText value="#{row.cat.value}" id="ot13"/>
+                                        </af:column>
+                                        
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+   
+    <c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle_zh']}"/>
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.stationperiodstatis']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center" valign="top">
+                                <!--af:panelGroupLayout id="pgl3" halign="center" layout="vertical"-->
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:outputLabel id="ol1" inlineStyle="font-size:large;"
+                                                    value="#{webuiBundle['module.name.history.stationsummary.datarange']}"/>
+                                    <af:spacer width="10" height="5" id="s2"/>
+                                    
+                                    <af:panelFormLayout id="pfl1">
+                                        <af:selectManyChoice label="#{webuiBundle['label.station']}" id="smc1"
+                                                         value="#{HistoryData.selectedSts_StSummary}" required="false">
+                                        <f:selectItems  id="si5" value="#{HistoryData.selectionStations_STData}"/>
+                                    </af:selectManyChoice>
+                                    
+                           
+                                        <af:inputDate label="#{webuiBundle['label.startdate']}" id="id1" inlineStyle="font-size:large;"
+                                                      value="#{HistoryData.start_StSummary}"  required="false">
+                                            <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                       </af:inputDate>
+                                       
+                                        <af:inputDate id="id2" inlineStyle="font-size:large;"  label="#{webuiBundle['label.enddate']}"
+                                                      value="#{HistoryData.end_Stsummary}"  required="false">
+                                          <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                       </af:inputDate>
+                                       
+                                        <f:facet name="footer">
+                                        <af:panelGroupLayout id="pgl3">
+                                          <af:spacer width="30" height="10" id="s30"/>
+                                            <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                                       actionListener="#{HistoryData.doStationSummary}"/>
+                                            <af:spacer width="20" height="10" id="s3"/>
+                                            <af:button text="#{webuiBundle['button.cancel.name']}" id="b2"   immediate="true"   action="toMain"/>
+                                          
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    </af:panelFormLayout>
+                                <!--/af:panelGroupLayout-->
+                                <af:spacer width="20" height="10" id="s22" />
+                                <af:panelCollection id="pc1"  inlineStyle="width:920px; font-size:large;">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table var="row" rowBandingInterval="1" id="t2" width="100%"
+                                              value="#{HistoryData.stSummaryData}" partialTriggers=":::b1"  rowSelection="multiple" columnSelection="single" allDetailsEnabled="true" columnStretching="multiple" >
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.station']}" id="c1" width="70" sortProperty="stationNO">
+                                            <af:outputText value="#{row.stationNO}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.productionEfficiency']}" id="c2" width="70" sortProperty="avgProductionEfficiency">
+                                            <af:outputText value="#{row.avgProductionEfficiency}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.borkenHeads']}" id="c3"  width="70" sortProperty="sumBrokenHeads">
+                                            <af:outputText value="#{row.sumBrokenHeads}" id="ot3"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.emptySpindle']}" id="c4"  width="70" sortProperty="sumEmptySpindles">
+                                            <af:outputText value="#{row.sumEmptySpindles}" id="ot4"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.badSpindles']}" id="c5"  width="70" sortProperty="sumBrokenSpindles">
+                                            <af:outputText value="#{row.sumBrokenSpindles}" id="ot5"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.creepSpindle']}" id="c6"  width="70" sortProperty="sumCreepSpindles">
+                                            <af:outputText value="#{row.sumCreepSpindles}" id="ot6"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['lable.doffCount']}" id="c7"  width="70" sortProperty="doffCount">
+                                            <af:outputText value="#{row.doffCount}" id="ot7"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.borkenRatePer1000Spindles']}" id="c8"  width="70" sortProperty="avgBrokenEndsPer1000">
+                                            <af:outputText value="#{row.avgBrokenEndsPer1000}" id="ot8"/>
+                                        </af:column>
+                                        <!--af:column sortable="false" headerText="班次总产量" id="c9"  width="70">
+                                            <af:outputText value="#{row.sumShiftProduction}" id="ot9"/>
+                                        </af:column-->
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.stationTotalProduction']}" id="c10"  width="70" sortProperty="sumStationProduction">
+                                            <af:outputText value="#{row.sumStationProduction}" id="ot10"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.doffTimeConsumption']}" id="c11"  width="70" sortProperty="doffTimeConsumption">
+                                            <af:outputText value="#{row.doffTimeConsumption}" id="ot11"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.doffBrokenHeads']}" id="c12"  width="70" sortProperty="doffBrokenHeads">
+                                            <af:outputText value="#{row.doffBrokenHeads}" id="ot12"/>
+                                        </af:column>
+                                        
+                                    </af:table>
+                                </af:panelCollection>
+                                
+                                <af:separator id="s4"/>
+                                
+                                <af:panelGroupLayout id="pgl4" rendered="false"  >
+                                    <af:showDetail disclosed="false" id="sd1" disclosedText="所有机台统计"
+                                                   undisclosedText="所有机台统计"
+                                                   disclosureListener="#{HistoryData.showAllStDetail}"
+                                                   partialTriggers="b1">
+                                                   
+                                    <af:panelLabelAndMessage id="plam1"       inlineStyle="font-size:large;"
+                                                         label="#{webuiBundle['module.name.history.allstationsummary.stationcount']}">
+                                    <af:outputLabel value="#{HistoryData.stationCount}" id="ol3" inlineStyle="font-size:large;"
+                                                    partialTriggers="b1"/>
+                                </af:panelLabelAndMessage>
+                                <af:separator id="s40"/>
+                                
+                                
+                                <af:panelFormLayout id="pfl2">
+                                    <af:panelLabelAndMessage id="plam2" label="#{webuiBundle['label.borkenHeads']}"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumBrokenHeads}" id="ol2"
+                                                        partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.emptySpindle']}" id="plam3"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumEmptySpindles}" id="ol31"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage id="plam4" label="#{webuiBundle['label.creepSpindle']}"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumCreepSpindles}" id="ol221"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam5" label="#{webuiBundle['label.badSpindles']}"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumBrokenSpindles}" id="ol231"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam6"
+                                                                label="#{webuiBundle['label.borkenRatePer1000Spindles']}"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgBrokenEndsPer1000}" id="ol241"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam7"
+                                                                label="#{webuiBundle['label.productionEfficiency']}"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgProductionEfficiency}" id="ol251"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage label="#{webuiBundle['label.energyConsumptionPerTon']}" id="plam8"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgEnergyConsumptionPerTon}" id="ol261"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                     
+                                     <!--af:panelLabelAndMessage label="#{webuiBundle['label.shiftProduction']}" id="plam90"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumShiftProduction}" id="ol271"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage-->
+                                    
+                                    
+                                       <af:panelLabelAndMessage label="#{webuiBundle['label.stationTotalProduction']}" id="plam91"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumStationProduction}" id="ol272"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    
+                                    <f:facet name="footer"/>
+                                </af:panelFormLayout>
+                                       
+                                    </af:showDetail>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

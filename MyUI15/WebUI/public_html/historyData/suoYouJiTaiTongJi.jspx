@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.allststatis']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                 <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center" valign="top">
+                                <!--af:panelGroupLayout id="pgl3" halign="center" layout="vertical"-->
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:outputLabel id="ol1" inlineStyle="font-size:large;"
+                                                    value="#{webuiBundle['module.name.history.allstationsummary']}"/>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    
+                                    <af:panelFormLayout id="pfl1">
+                                     <af:inputDate label="#{webuiBundle['label.startdate']}" id="id1" inlineStyle="font-size:large;"  required="false"
+                                                   value="#{HistoryData.start_allStSummary}">
+                                        <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    </af:inputDate>
+                                    
+                                    <af:inputDate id="id2" inlineStyle="font-size:large;"   label="#{webuiBundle['label.enddate']}"  required="false"
+                                                  value="#{HistoryData.end_allStSummary}">
+                                        <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    </af:inputDate>
+                                    
+                                        <f:facet name="footer">
+                                        <af:panelGroupLayout id="pgl3">
+                                          <af:spacer width="50" height="20" id="s30"/>
+                                            <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                                       actionListener="#{HistoryData.doAllStationSummary}"/>
+                                            <af:spacer width="20" height="10" id="s3"/>
+                                            <!--af:button text="#{webuiBundle['button.cancel.name']}" id="b2"/-->
+                                          
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    </af:panelFormLayout>
+                                <!--/af:panelGroupLayout-->
+                                <af:spacer width="20" height="10" id="s22"/>
+
+                                <af:panelLabelAndMessage id="plam1"       inlineStyle="font-size:large;"
+                                                         label="#{webuiBundle['module.name.history.allstationsummary.stationcount']}">
+                                    <af:outputLabel value="#{HistoryData.stationCount}" id="ol3" inlineStyle="font-size:large;"
+                                                    partialTriggers="b1"/>
+                                </af:panelLabelAndMessage>
+                                <af:separator id="s4"/>
+                                
+                                
+                                <af:panelFormLayout id="pfl2">
+                                    <af:panelLabelAndMessage id="plam2" label="#{webuiBundle['label.borkenHeads']}"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumBrokenHeads}" id="ol2"
+                                                        partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.emptySpindle']}" id="plam3"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumEmptySpindles}" id="ol31"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage id="plam4" label="#{webuiBundle['label.creepSpindle']}"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumCreepSpindles}" id="ol221"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam5" label="#{webuiBundle['label.badSpindles']}"  inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumBrokenSpindles}" id="ol231"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam6"
+                                                                label="#{webuiBundle['label.borkenRatePer1000Spindles']}"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgBrokenEndsPer1000}" id="ol241"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage id="plam7"
+                                                                label="#{webuiBundle['label.productionEfficiency']}"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgProductionEfficiency}" id="ol251"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                       <af:panelLabelAndMessage label="#{webuiBundle['label.energyConsumptionPerTon']}" id="plam8"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.avgEnergyConsumptionPerTon}" id="ol261"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                     
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.shiftProduction']}" id="plam90"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumShiftProduction}" id="ol271"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    
+                                       <af:panelLabelAndMessage label="#{webuiBundle['label.stationTotalProduction']}" id="plam91"   inlineStyle="font-size:large;">
+                                        <af:outputLabel value="#{HistoryData.allStationSummary.sumStationProduction}" id="ol272"   partialTriggers="b1"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    
+                                    <f:facet name="footer"/>
+                                </af:panelFormLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

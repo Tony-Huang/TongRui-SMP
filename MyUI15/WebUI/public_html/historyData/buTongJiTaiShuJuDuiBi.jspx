@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"  xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle_zh']}"/>
+   
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['module.name.history.stationcompare']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:outputLabel value="#{webuiBundle['module.name.history.stationcompare']}" id="ol1" inlineStyle="font-size:large;"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:panelFormLayout id="pfl1" rows="2">
+                                   
+                                    <af:selectManyChoice label="#{webuiBundle['label.shift']}" id="soc2" value="#{HistoryData.shift_STData}" >
+                                        <f:selectItems  id="si3"     value="#{HistoryData.selectionShift_STData}"/>
+                                    </af:selectManyChoice>
+                                   
+                                     <af:selectManyChoice label="#{webuiBundle['label.station']}" id="smc1"
+                                                         value="#{HistoryData.selectedStations_STData}" required="false">
+                                        <f:selectItems  id="si5" value="#{HistoryData.selectionStations_STData}"/>
+                                    </af:selectManyChoice>
+                                    
+                                    <af:inputDate label="#{webuiBundle['label.startdate']}" id="id1"  value="#{HistoryData.start_STData}" />
+                                    <af:inputDate label="#{webuiBundle['label.enddate']}" id="id2" value="#{HistoryData.end_STData}"    />
+                                   
+                                    <!--af:selectOneChoice label="工艺品种" id="smc2"   value="#{HistoryData.selectedCat_STData}">
+                                        <f:selectItems  id="si10" value="#{HistoryData.selectionCats_STData}"/>
+                                    </af:selectOneChoice-->
+                                    
+                                    <af:inputText   label="#{webuiBundle['label.branch']}" id="in_cat" value="#{HistoryData.catValue_STData}"          >
+                                        <af:validateLongRange minimum="1" />
+                                    </af:inputText>
+                                
+                                    <af:selectOneChoice label="#{webuiBundle['mat.name']}" id="soc3"
+                                                        value="#{HistoryData.selectedMat_STData}">
+                                        <f:selectItems  id="si12" value="#{HistoryData.selectionMats_STData}"/>                  
+                                    </af:selectOneChoice>
+                                    
+                                     <af:inputText   label="#{webuiBundle['label.twist']}" id="in_twist" value="#{HistoryData.twist_STData}"          >
+                                        <af:validateDoubleRange minimum="0.1"/>
+                                    </af:inputText>
+                                    
+                                    <f:facet name="footer">
+                                        <af:panelGroupLayout id="pgl3">
+                                           
+                                            <af:spacer width="100" height="30" id="s1"/>
+                                            <af:button text="#{webuiBundle['button.ok.name']}" id="b1" actionListener="#{HistoryData.doStationCompare}"/>
+                                            <af:spacer width="30" height="30" id="s21"/>       
+                                            <af:button text="#{webuiBundle['button.cancel.name']}" id="b2" immediate="true"   action="toMain"/>     
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelFormLayout>
+                                <af:panelCollection id="pc1" inlineStyle="font-size:large;">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table var="row" rowBandingInterval="1" id="t2" partialTriggers=":::b1"
+                                              value="#{HistoryData.stationCompData}" rowSelection="single"
+                                              columnSelection="single" allDetailsEnabled="true"    columnStretching="multiple"
+                                             inlineStyle="font-size:large;" width="924">
+                                             
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.station']}" id="c0" sortProperty="stationNO"
+                                                   width="65">
+                                            <af:outputText value="#{row.stationNO}" id="ot0"/>
+                                        </af:column>
+                                        
+                                          <af:column sortable="true" headerText="#{webuiBundle['label.shift']}" id="c01" width="70" sortProperty="shift.name">
+                                            <af:outputText value="#{row.shift.name}" id="ot01"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.productionEfficiency']}" id="c1" sortProperty="avgProductionEfficiency"
+                                                   width="60">
+                                            <af:outputText value="#{row.avgProductionEfficiency}" id="ot1"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.energyConsumptionPerTon']}" id="c2" sortProperty="avgEnergyConsumptionPerTon"
+                                                   width="60">
+                                            <af:outputText value="#{row.avgEnergyConsumptionPerTon}" id="ot2"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.shiftProduction']}" id="c3" sortProperty="sumShiftProduction"
+                                                   width="60">
+                                            <af:outputText value="#{row.sumShiftProduction}" id="ot3"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.stationTotalProduction']}" id="c4"  width="60"  sortProperty="sumStationProduction">
+                                            <af:outputText value="#{row.sumStationProduction}" id="ot4"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.doffTimeConsumption']}" id="c5"  width="60" sortProperty="doffTimeConsumption">
+                                            <af:outputText value="#{row.doffTimeConsumption}" id="ot5"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.doffBrokenHeads']}" id="c6" width="60" sortProperty="doffBrokenHeads">
+                                            <af:outputText value="#{row.doffBrokenHeads}" id="ot6"/>
+                                        </af:column>
+                                       
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.borkenRatePer1000Spindles']}" id="c7" width="80" sortProperty="avgBrokenEndsPer1000">
+                                            <af:outputText value="#{row.avgBrokenEndsPer1000}" id="ot7"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.emptySpindle']}" id="c8"  width="50" sortProperty="sumEmptySpindles">
+                                            <af:outputText value="#{row.sumEmptySpindles}" id="ot8"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.badSpindles']}" id="c9"  width="50" sortProperty="sumBrokenSpindles">
+                                            <af:outputText value="#{row.sumBrokenSpindles}" id="ot9"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.creepSpindle']}" id="c10"  width="50" sortProperty="sumCreepSpindles">
+                                            <af:outputText value="#{row.sumCreepSpindles}" id="ot10"/>
+                                        </af:column>
+                                        
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.borkenHeads']}" id="c11"  width="60" sortProperty="sumBrokenHeads">
+                                            <af:outputText value="#{row.sumBrokenHeads}" id="ot11"/>
+                                        </af:column>
+                                        
+                                         <af:column sortable="true" headerText="#{webuiBundle['lable.doffCount']}" id="c12"  width="60" sortProperty="doffCount">
+                                            <af:outputText value="#{row.doffCount}" id="ot12"/>
+                                        </af:column>
+                                        
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

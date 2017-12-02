@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.main']}" id="d1" >
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <!--af:navigationPane hint="tabs" id="np1" binding="#{backingBeanScope.backing_main.np1}">
+                        <af:commandNavigationItem id="ni1" text="机台班次时间数据对比"
+                                                  binding="#{backingBeanScope.backing_main.ni1}"/>
+                        <af:commandNavigationItem id="ni2" text="不同机台数据对比"
+                                                  binding="#{backingBeanScope.backing_main.ni2}"/>
+                        <af:commandNavigationItem id="ni3" text="机台时间段统计数据"
+                                                  binding="#{backingBeanScope.backing_main.ni3}"/>
+                        <af:commandNavigationItem id="ni4" text="同纱型段断头率对比"
+                                                  binding="#{backingBeanScope.backing_main.ni4}"/>
+                    </af:navigationPane-->
+                    <af:panelStretchLayout id="psl1" startWidth="21px">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                 
+                              <af:panelGroupLayout id="pgl2" halign="start" layout="horizontal">
+                                <af:spacer width="50" height="100" id="s21"/>
+                                <af:link text="#{webuiBundle['main.img.user']}" id="l1" icon="/igms/formal/user3.png"  inlineStyle="font-size:large;"  action="browseUsers">
+                                    <!--af:outputText value="outputText1" id="ot1"/-->
+                                </af:link>
+                                
+                                <af:spacer width="20" height="100" id="s22"/>
+                                <af:link text="#{webuiBundle['main.img.rt']}" id="l2" icon="/igms/formal/realtime.jpg"  inlineStyle="font-size:large;"   action="stRunning">
+                                    <!--af:outputText value="outputText1" id="ot2"/-->
+                                </af:link>
+                                
+                                 <af:spacer width="20" height="100" id="s23"/>
+                                <af:link text="#{webuiBundle['main.img.syssetting']}" id="l3" icon="/igms/formal/systemSettin.jpg"  inlineStyle="font-size:large;"    action="browseMonitors">
+                                    <!--af:outputText value="outputText1" id="ot3"/-->
+                                </af:link>
+                                
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+  
+</jsp:root>

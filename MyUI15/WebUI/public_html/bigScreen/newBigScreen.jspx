@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <!--c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle']}"/-->
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['module.name.bigscreen.new']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                
+                <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl3" halign="center" layout="vertical">
+                            <af:outputLabel id="ol1" value="#{webuiBundle['module.name.bigscreen.new']}"
+                                                inlineStyle="font-size:large; font-weight:bolder;"/>
+                                <af:spacer width="10" height="30" id="s2"/>
+                            
+                                <af:panelFormLayout id="pfl1">
+                                    <af:inputText label="#{webuiBundle['label.description']}" id="it1"
+                                                  value="#{BigScreenMgt.description}" required="false">
+                                        <!--af:validateLength minimum="1"/-->
+                                    </af:inputText>
+                                    <af:inputText label="#{webuiBundle['label.bigscreenNO']}" id="it2"
+                                                  value="#{BigScreenMgt.bigScreenNO}" required="true" 
+                                                  showRequired="true">
+                                        <af:validateLongRange minimum="1" maximum="60"/>
+                                       
+                                    </af:inputText>
+                                    <af:selectManyChoice id="soc1" required="true"
+                                                         label="#{webuiBundle['label.station']}"
+                                                        value="#{BigScreenMgt.selectedStations}">
+                                        <f:selectItems value="#{BigScreenMgt.selectionStations}" id="si1"/>
+                                    </af:selectManyChoice>
+                                    <!--af:selectOneChoice label="#{webuiBundle['role.name']}" valueChangeListener="#{UserMgt.selectRole}" id="soc1"
+                                                    value="#{UserMgt.selectedRole}">
+                                    <f:selectItems value="#{UserProfile.availableRoles}" id="si1"/>
+                                </af:selectOneChoice-->
+                                    <f:facet name="footer">
+                                        <af:panelGroupLayout id="pgl2">
+                                            <af:spacer width="30" height="50" id="s4"/>
+                                            <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                                       action="#{BigScreenMgt.saveBigScreen}"/>
+                                            <af:spacer width="20" height="10" id="s3"/>
+                                            <af:button text="#{webuiBundle['button.cancel.name']}" id="b2"
+                                                       immediate="true" action="back"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelFormLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start">
+                            <af:spacer width="30" height="5" id="s201"/>
+                        </f:facet>
+                        <f:facet name="end"/>
+                        <f:facet name="top">
+                            <af:spacer width="5" height="30" id="s1"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

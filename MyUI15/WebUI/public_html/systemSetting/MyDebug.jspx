@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="MyDebug.jspx" id="d1" >
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2">
+                                <af:panelGroupLayout id="pgl3" halign="center" layout="vertical">
+                                    <af:panelFormLayout id="pfl1">
+                                        <af:outputLabel value="Data Acquisition Frequency" id="ol1" inlineStyle="font-size:large;"/>
+                                        <af:spacer width="10" height="20" id="s1"/>
+                                        <af:panelGroupLayout id="pgl4" layout="horizontal" halign="center">
+                                               <af:inputText label="Frequency" id="it1" required="true"
+                                                             inlineStyle="font-size:large;" partialTriggers="Ok"
+                                                             value="#{SystemSetting.frequency}">
+                                                <af:validateLongRange minimum="5" maximum="1800"/>
+                                            </af:inputText>
+                                            <af:outputLabel value="Seconds" id="ol2" inlineStyle="font-size:medium;"/>
+                                        </af:panelGroupLayout>
+                                        <f:facet name="footer">
+                                            <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                            <af:spacer width="50" height="50" id="s2"/>
+                                            <af:button text="Ok" id="Ok"
+                                                   actionListener="#{SystemSetting.updateJobFrequency}"
+                                                       action="toMain"/>
+                                            <af:spacer width="10" height="10" id="s3"/>
+                                            <af:button text="Cancel" id="Cancel" immediate="true" action="toMain"/>
+                                            </af:panelGroupLayout>
+                                            
+                                        </f:facet>
+                                    </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+    <!--oracle-jdev-comment:auto-binding-backing-bean-name:backing_systemSetting_MyDebug-->
+</jsp:root>

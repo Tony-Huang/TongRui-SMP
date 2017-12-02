@@ -1,0 +1,97 @@
+
+================2015.10.10 - update==========================
+
+1. 采集频率和刷新频率可配置  time interval for realtime monitoring are configurable. This include single station and all station.
+
+2. 数据库服务器URL可配置  DB server can be configurable. The DB server was in same host as SMP app before. Now DB server and Tomcat can be 
+different machines.
+
+---change sets---
+com.hdp.smp.connection.MyConnectionProvider
+com.hdp.smp.Constants
+com.hdp.smp.schedule.JobScheduler , line 26
+com.hdp.smp.persistence.StdataDAO , line 180
+com.hdp.smp.front.ui.mbean.RealTimeData_AllStations ,line 65
+com.hdp.smp.front.ui.mbean.RealTimeData   , lin3 337
+
+showRT.jspx , line 137
+showRT_AllStations.jspx , line 23
+
+=================2015.11.12 - update============================
+1. 在所有机台监控界面，后台数据的收集采用多线程并发处理，以提高性能.
+---change sets---
+com.hdp.smp.front.util.ReadAllData
+com.hdp.smp.front.util.ReadDataTask
+com.hdp.smp.front.ui.mbean.RealTimeData_AllStations , line 57-60
+
+2. 修复机台/班次产量bug
+---change sets---
+com.hdp.smp.persistence.StatisDAO.getStatisByShift()  , line 240-251
+com.hdp.smp.persistence.StatisDAO.stationSummary() , line 443
+com.hdp.smp.persistence.StatisDAO.stationSummary() , line 324
+com.hdp.smp.persistence.StatisDAO.allStationSummary() , line 517-520
+
+com.hdp.smp.persistence.StatisDAO.getTotalProduction(),
+com.hdp.smp.persistence.StatisDAO.getShiftProduction(),
+com.hdp.smp.persistence.StatisDAO.getStationroduction(),
+com.hdp.smp.persistence.StatisDAO.getProductionByShiftByStation(),
+
+3. 合并工艺品种查机台的生产时间.
+---change sets---
+com.hdp.smp.front.ui.model.StationByCat , line 137-172 
+
+=================2015.11.14 - update============================
+1.英文支持
+
+<c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.UIBundle_CN']}"/>
+-----delete <c:set var  ...> , add text resource...     ,and change as  title="#{webuiBundle['station.list.header.test']}"
+ login.jspx
+ includes/aboutPopout.jspx
+ templates/templateMain1.jspx
+ main.jspx
+ 
+ =========== 2017.10.08 - change set ===============
+ Symptom : data confused in different browser with different monitor. That is, use one client browser1 to monitor statino1 realtime
+ spindle speed , and user another client browser2 to monitor station2 realtime spindle data, sometimes station2 spindle speed data appear in
+ browser1 page.
+ 
+ Root Cause : DataProvider_SpindleSpeed in RealTimeData  is a singleton . 
+ Solution: 1)should make it as normal class.  2)make the RealTimeData bean scope as session.
+ 
+ change list : 
+  1) class : RealTimeData  , RealTimeData.DataProvider_SpindleSpeed
+ 
+  2) changed code or method :
+   a) RealTimeData.refreshData(PollEvent pollEvent) method :
+     line 323-328.
+     comment out line 323-328
+   b) RealTimeData.getSpindleSpeeds()  method:
+    change line 358. comment out line 358.
+    add following:
+       int spindleStartNO= this.spindleNORange(spindleNO)[0];
+       DataProvider_SpindleSpeed dp = DataProvider_SpindleSpeed.get();
+       dp.setStationNO(this.stationNO);
+       dp.setSpindlestartNO(spindleStartNO);
+       
+       log.info("read spindle speed realtime data, stationNO:"+this.stationNO +"  spindleStartNO:"+spindleStartNO);
+       
+       return dp.getSpindleSpeedMatrix();
+       
+   c) RealTimeData.readSpindleSpeed(ActionEvent actionEvent)
+     change line 384-387.
+     comment out line 387-387
+     
+   d) DataProvider_SpindleSpeed
+    comment out line 394;
+    comment out line 397;
+    add following after line 397:
+      return  new DataProvider_SpindleSpeed();
+      
+ log pattern:
+   user want to read realtime data, input stationNO:
+   read spindle :xxx   speed  from station
+   read spindle speed realtime data, stationNO:  (this happens repeatedly by interval time, 14 seconds for example)
+ 
+ 
+ 
+

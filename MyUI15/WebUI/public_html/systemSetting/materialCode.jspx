@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+   
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.matcodelist']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                                
+                                 <af:outputLabel id="ol1" value="#{webuiBundle['module.name.mat.list']}"
+                                  inlineStyle="font-size:large; font-weight:bolder;"/>
+                                 <af:spacer width="10" height="30" id="s2"/>
+                                
+                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                    <af:button text="#{webuiBundle['button.add']}" id="b3" action="add"/>
+                                    <af:button text="#{webuiBundle['button.update']}" id="b2"
+                                               actionListener="#{SystemSetting.updateMat}"/>
+                                    <af:button text="#{webuiBundle['button.delete']}" id="b1"
+                                               actionListener="#{SystemSetting.deleteMat}"/>
+                                </af:panelGroupLayout>
+                                <af:panelCollection id="pc1">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table var="row" rowBandingInterval="1" id="t2"
+                                              value="#{MaterialMappingList}" rowSelection="single"
+                                              columnSelection="multiple" editingMode="clickToEdit"
+                                              partialTriggers=":::b3 :::b2 :::b1"
+                                              binding="#{SystemSetting.matMappingTable}" allDetailsEnabled="true"
+                                              columnStretching="multiple">
+                                        <af:column sortable="true" sortProperty="name"  id="c1" headerText="#{webuiBundle['mat.name']}"
+                                                   width="50%">
+                                            <af:inputText value="#{row.name}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortable="true" sortProperty="code"  id="c3" headerText="#{webuiBundle['mat.code']}"
+                                                   width="50%">
+                                            <af:inputText value="#{row.code}" id="ot3"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

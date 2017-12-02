@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.UIBundle_CN']}"/>
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="登录" id="d1">
+        
+      
+            <af:form id="f1">
+                <af:panelSplitter orientation="vertical" splitterPosition="50" id="ps1">
+                    <!--f:facet name="first"/-->
+                    
+         <f:facet name="first">
+          <af:panelGroupLayout layout="scroll" id="ptpgl1" styleClass="AFBrandingBar"
+                               inlineStyle="background-color:ThreeDDarkShadow;">
+            <f:subview id="about">
+              <jsp:include page="/includes/aboutPopup.jspx"/>
+            </f:subview>
+            <af:panelBorderLayout id="ptpbl1">
+              <f:facet name="start">
+                <af:panelGroupLayout styleClass="AFBrandingBarItem" id="ptpgl2">
+                  <af:link id="logoLink" action="index" icon="/igms/logo-small.jpg" styleClass="AFBrandingLogo"
+                           shortDesc="#{webuiBundle['product.logo.shortDesc']}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="innerStart">
+                <af:panelGroupLayout styleClass="AFBrandingBarItem"
+                                     id="ptpgl3" layout="horizontal">
+                 <af:spacer width="10" id="pts-prodname"/>
+                  <af:outputText styleClass="AFBrandingBarTitle"
+                                 id="ptot1" value="#{webuiBundle['product.name']}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <af:panelBorderLayout id="ptpbl2">
+                <af:spacer inlineStyle="max-width: 100%;" styleClass="AFStretchWidth">
+                    <?audit suppress oracle.ide.xml.wellformedness-error?>
+                  </af:spacer>
+                <f:facet name="end">
+                  <af:panelGroupLayout layout="vertical" styleClass="AFBrandingBarItem"
+                                       id="ptpgl4">
+                    <af:navigationPane hint="bar" id="ptnp1">
+                    
+                     <!--af:commandNavigationItem text="Accessibility"
+                                                shortDesc="Edit accessibility preferences"
+                                                id="ptcni0"
+                                                action="#{accessibility.goToPreferences}"
+                                                rendered="#{attrs.mode != 'accessibility'}"/-->
+                    
+                      <!--af:commandNavigationItem text="Accessibility"
+                                                shortDesc="Edit accessibility preferences"
+                                                id="ptcni0"
+                                               /-->
+                                                
+                                                
+                                                
+                      <af:commandNavigationItem text="#{webuiBundle['product.about.name']}"
+                                                shortDesc="View version information about the software "
+                                                id="ptcni1" styleClass="AFBrandingBarTitle" targetFrame="_self"
+                                                windowModalityType="applicationModal" windowEmbedStyle="inlineDocument"
+                                                partialSubmit="true" immediate="true">
+                        <af:showPopupBehavior popupId="::about:about"/>
+                      </af:commandNavigationItem>
+                      <!--af:commandNavigationItem text="Home" immediate="true"
+                                                shortDesc="Learn mbout SMP"
+                                                id="ptcni2" partialSubmit="true" action="#{aboutBean.goHome}"/-->
+                    </af:navigationPane>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:panelBorderLayout>
+              <f:facet name="innerEnd">
+                <af:spacer width="4" id="pts2"/>
+              </f:facet>
+              <f:facet name="end">
+                <af:panelGroupLayout layout="horizontal" styleClass="AFBrandingBarItem"
+                                     id="ptpgl5">
+                  <af:statusIndicator id="ptsi1"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelBorderLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        
+                                 
+        <f:facet name="second">
+          <af:panelSplitter orientation="vertical" positionedFromEnd="true" splitterPosition="422" id="ps2" >
+           <f:facet name="first">
+            <af:decorativeBox topHeight="20px"
+                                id="ptdb-bodyCenter" dimensionsFrom="auto" theme="contentBody">
+              <f:facet name="center">
+                <af:decorativeBox topHeight="20px"   id="ptdbbody-center" dimensionsFrom="auto">
+                         <f:facet name="center">
+                        
+                        <af:panelStretchLayout startWidth="10px" id="ptpsl2"
+                                                     dimensionsFrom="auto">
+                                <f:facet name="start">
+                                  <af:spacer id="pts6"/>
+                                </f:facet>
+                                <f:facet name="center">
+                               
+                                 <!--af:panelGroupLayout id="pglfirst            layout="horizontal" halign="center"-->
+                                  <af:decorativeBox theme="default" id="ptdb2"   centerLandmark="main" dimensionsFrom="parent">
+                                                    
+                                     <!--f:facet name="top" /-->               
+                                                    
+                                    <f:facet name="center">
+                                      <!--af:facetRef facetName="center1"/-->
+                                <!--login form-->
+                                
+                                <af:panelGroupLayout id="pgl4" 
+                                                     layout="horizontal" halign="center">
+                                  <af:spacer width="10" height="10" id="s6"/>
+                                             
+                                  <af:panelFormLayout id="pfl1" >
+                                    <af:spacer width="200" height="100" id="s2"/>
+                                    
+                                    <!--af:outputLabel value="登录" id="logint-hint"
+                                                      inlineStyle="background-color:ActiveCaption; font-size:large;">
+                                    </af:outputLabel-->
+                                    
+                                    <af:panelBox text="#{webuiBundle['login.name']}" id="pb1" titleHalign="center" type="stretch"
+                                                 binding="#{Login.loginBox}"
+                                                 inlineStyle="font-size:x-large; font-variant:titling-caps; font-weight:bolder;">
+                                      <f:facet name="toolbar"/>
+                                      <af:panelFormLayout id="pfl2" maxColumns="2">
+                                        <af:spacer width="10" height="20" id="s1"/>
+                                        <af:inputText label="#{webuiBundle['login.username']}" id="it1"  columns="30" required="true"
+                                                      value="#{Login.username}"/>
+                                         <af:spacer width="10" height="10" id="s3" />
+                                        <af:inputText id="it2"  secret="true" columns="30" required="true" value="#{Login.password}"
+                                                      label="#{webuiBundle['login.password']}">
+                                          <af:validateLength minimum="6" maximum="30" hintMinimum="6" hintMaximum="30"/>
+                                        </af:inputText>
+                                        <f:facet name="footer">
+                                          <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                           <af:spacer width="30" height="80" id="s5"/>
+                                           <af:button text="#{webuiBundle['button.ok.name']}" id="b2" 
+                                                   action="#{Login.doLogin2}"/>
+                                            <af:spacer width="20" height="30" id="s4"/>
+                                           <af:button id="b3" action="#{Login.logoff}"
+                                                      text="#{webuiBundle['button.cancel.name']}" immediate="true"/>
+                                         </af:panelGroupLayout>
+                                        </f:facet>
+                                      </af:panelFormLayout>
+                                    </af:panelBox>
+                                   
+                                    <f:facet name="footer">
+                                     
+                                    </f:facet>
+                                  </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                                
+                                
+                              
+                              </f:facet>
+                            </af:decorativeBox>
+                           
+                           <!--  end-->
+                           <!--/af:panelGroupLayout-->
+                           
+                            </f:facet>
+                           </af:panelStretchLayout>
+                         </f:facet>
+
+                </af:decorativeBox>
+              </f:facet>
+            </af:decorativeBox>
+           </f:facet>
+           
+           
+           <f:facet name="second">
+              
+              </f:facet>
+           
+           </af:panelSplitter>
+        </f:facet>
+      </af:panelSplitter>
+     </af:form>
+    </af:document>
+    </f:view>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:Login-->
+</jsp:root>

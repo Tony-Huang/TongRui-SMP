@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.stationlist']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                                <af:outputLabel id="ol1" value="#{webuiBundle['module.name.station.list']}"
+                                  inlineStyle="font-size:large; font-weight:bolder;"/>
+                                 <af:spacer width="10" height="30" id="s2"/>
+                                 
+                                  <af:panelFormLayout id="pfl1" rows="2">
+                                  
+                                   
+                                    <f:facet name="footer">
+                                      <af:panelGroupLayout id="pgl31" layout="horizontal" halign="center">
+                                        <af:button text="#{webuiBundle['button.add']}" id="b3" action="add"/>
+                                        <af:button text="#{webuiBundle['button.update']}" id="b2" actionListener="#{SystemSetting.updateStation}"/>
+                                        <af:button text="#{webuiBundle['button.delete']}" id="b1" actionListener="#{SystemSetting.deleteStation}"/>
+                                     </af:panelGroupLayout>
+                                    </f:facet>				
+                                </af:panelFormLayout >
+                                 
+                                 
+                
+                                <af:panelGroupLayout id="pgl3" layout="vertical" halign="center">
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{StationList}" var="row" rowBandingInterval="1" id="t2"
+                                                  rowSelection="single" columnSelection="multiple"
+                                                  editingMode="clickToEdit" binding="#{SystemSetting.stationTable}"
+                                                  partialTriggers=":::b3 :::b2 :::b1" columnStretching="multiple"
+                                                  allDetailsEnabled="true" width="700">
+                                            <af:column sortable="true" sortProperty="station.NO"
+                                                       headerText="#{webuiBundle['station.list.header.id']}"
+                                                       align="start" id="c1">
+                                                <af:inputText value="#{row.station.NO}" label="stNO"  id="ot1" simple="true"/>
+                                            </af:column>
+                                            <!--af:column sortable="true" sortProperty="station.description" headerText="Description" align="start" id="c2">
+                                            <af:inputText value="#{row.station.description}" label="description" simple="true" id="ot2"/>
+                                        </af:column-->
+                                            <af:column headerText="#{webuiBundle['station.list.header.ip']}" id="c4"
+                                                       sortable="true" sortProperty="ip">
+                                                <af:inputText value="#{row.ip}" label="ip" simple="true" id="ot4"/>
+                                            </af:column>
+                                            <af:column headerText="#{webuiBundle['station.list.header.port']}" id="c5"
+                                                       sortable="true" sortProperty="port">
+                                                <af:inputText value="#{row.port}" label="port" simple="true" id="ot5"/>
+                                            </af:column>
+                                            <af:column headerText="#{webuiBundle['station.list.header.monitorID']}"
+                                                       id="c6" sortable="true" sortProperty="id">
+                                                <af:inputText value="#{row.monitorId}" label="monId" simple="true"
+                                                              id="ot6"/>
+                                            </af:column>
+                                            <af:column headerText="#{webuiBundle['label.description']}" id="c7"
+                                                       sortable="true" sortProperty="description">
+                                                <af:inputText value="#{row.description}" label="monId" simple="true"
+                                                              id="ot7"/>
+                                            </af:column>
+                                            <af:column headerText="#{webuiBundle['station.list.header.test']}" id="c8">
+                                                <af:button id="ot8" text="#{webuiBundle['button.test']}"
+                                                           actionListener="#{SystemSetting.testModbusConn}"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

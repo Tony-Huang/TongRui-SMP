@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+    <category>
+        <data production="36.0" efficiency="96.0" categoryName="N/A002"/>
+    </category>
+    <emptyBrokenStatis totalEmpty="11" totalBroken="8" totalEfficiency="96.0">
+        <data stNO="3" broken="8" spindleSerials="11,9,2,1,10,3,7,8,6,4,5"/>
+    </emptyBrokenStatis>
+    <defectiveSpindle>
+        <data stNO="3" badSpindles="26,33,32,27,31,29,28,34,30,36,25,24,35" creepSpindles="14,18,19,13,16,21,17,12,23,15,20,22"/>
+    </defectiveSpindle>
+    <doffTime>
+        <doffBroken>
+            <data stNO="3" doffBrokens="14"/>
+        </doffBroken>
+        <doffTimeConsumption>
+            <data stNO="3" time="5"/>
+        </doffTimeConsumption>
+        <doffCountdown>
+            <data stNO="3" doffEstimate="15"/>
+        </doffCountdown>
+    </doffTime>
+</data>

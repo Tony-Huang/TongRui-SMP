@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.UIBundle_CN']}"/>
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="纱型段对比" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" halign="center" layout="vertical">
+                            
+                                               <af:spacer width="10" height="30" id="s2"/>
+                                <af:outputLabel value="#{webuiBundle['module.name.history.sameshapecompare']}" id="ol1" inlineStyle="font-size:large;"/>
+                                <af:spacer width="10" height="20" id="s3"/>
+                                <af:panelGroupLayout id="pgl21" layout="vertical">
+                                    
+                                    <af:panelFormLayout id="pfl1" rows="1"> 
+                                      <!--af:inputText label="机台" id="it1" columns="6" value="#{SameShapeComparasion.stationId1}" required="true"/-->
+                                      <af:selectOneChoice label="机台" id="soc2" value="#{SameShapeComparasion.st1}"    required="true"
+                                                          autoSubmit="true"
+                                                          valueChangeListener="#{SameShapeComparasion.stationChanged1}">
+                                           <f:selectItems value="#{SameShapeComparasion.selectionStations}" id="si21"/>
+                                      </af:selectOneChoice>
+                                      
+                                      <af:inputDate label="#{webuiBundle['label.date']}" id="id1"  value="#{SameShapeComparasion.date1}"   required="true"
+                                                    valueChangeListener="#{SameShapeComparasion.dateChanged1}"
+                                                    autoSubmit="true">
+                                            <!--af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/-->
+                                        </af:inputDate>
+                                        
+                                        <af:selectOneChoice   label="#{webuiBundle['lable.timerange']}"  id="soc1" value="#{SameShapeComparasion.statis1}"    required="false"
+                                                            partialTriggers="id1 soc2"  autoSubmit="true">
+                                           <f:selectItems value="#{SameShapeComparasion.selectionSpins1}" id="si11"/>
+                                      </af:selectOneChoice>
+                                        <!--af:inputDate label="#{webuiBundle['lable.timerange']}" id="id3" value="#{HistoryData.date1_end}"    required="true">
+                                            <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </af:inputDate-->
+                                        <!--af:inputText label="#{webuiBundle['label.offset']}" id="it11" columns="6" value="#{HistoryData.stationId1}" required="true"/-->
+                                      
+                                       <f:facet name="footer"/>
+                                       
+                                     </af:panelFormLayout>
+                                    <af:spacer width="10" height="20" id="s4"/>
+                                    <af:panelFormLayout id="pfl2" rows="1">
+                                        <!--af:inputText label="机台" id="it2" columns="6" value="#{HistoryData.stationId2}"
+                                                      required="true"/>
+                                        <af:inputDate label="#{webuiBundle['label.date']}" id="id2" value="#{HistoryData.date2_start}"
+                                                      required="true">
+                                            <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </af:inputDate>
+                                        <af:inputDate id="id4" value="#{HistoryData.date2_end}"
+                                                      required="true" label="#{webuiBundle['lable.timerange']}">
+                                            <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                        </af:inputDate>
+                                         <af:inputText label="#{webuiBundle['label.offset']}" id="it21" columns="6" value="#{HistoryData.stationId1}" required="true"/-->
+                                         <af:selectOneChoice label="机台" id="soc31" value="#{SameShapeComparasion.st2}"    required="true"
+                                                             autoSubmit="true"
+                                                             valueChangeListener="#{SameShapeComparasion.stationChanged2}">
+                                           <f:selectItems value="#{SameShapeComparasion.selectionStations}" id="si321"/>
+                                      </af:selectOneChoice>
+                                      
+                                      <af:inputDate label="#{webuiBundle['label.date']}" id="id21" value="#{SameShapeComparasion.date2}"   required="true"
+                                                    valueChangeListener="#{SameShapeComparasion.dateChanged2}"
+                                                    autoSubmit="true">
+                                            <!--af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/-->
+                                        </af:inputDate>
+                                        
+                                        <af:selectOneChoice   label="#{webuiBundle['lable.timerange']}"  id="soc41" value="#{SameShapeComparasion.statis2}"    required="false"
+                                                            partialTriggers="id21 soc31"  autoSubmit="true">
+                                           <f:selectItems value="#{SameShapeComparasion.selectionSpins2}" id="si141"/>
+                                      </af:selectOneChoice>
+                                       
+                                        <f:facet name="footer">
+                                            <af:panelGroupLayout id="pgl4">
+                                              <af:spacer width="160" height="30" id="s1"/>
+                                              <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                                         actionListener="#{SameShapeComparasion.doSameShapeCompare}"/>
+                                                 <af:spacer width="30" height="30" id="s12"/>
+                                            <af:button text="#{webuiBundle['button.cancel.name']}" id="b2" immediate="true"
+                                                       action="toMain"/>
+                                            
+                                            </af:panelGroupLayout>
+                                        </f:facet>
+                                    </af:panelFormLayout>
+                                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                        <af:panelFormLayout id="pfl3">
+                                        
+                                          <af:panelLabelAndMessage label="机台编号" id="plam10"
+                                                                   inlineStyle="font-size:x-large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.st1.id}" id="ol102"
+                                                                partialTriggers="b1" inlineStyle="font-size:x-large;"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            <af:panelLabelAndMessage label="断头数" id="plam11"
+                                                                     inlineStyle="font-size:large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.statis1.sumBrokenHeads}" id="ol112"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                             <af:panelLabelAndMessage label="千锭时断头率" id="plam12"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.statis1.maxBrokenEndsPer1000}" id="ol122"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            
+                                            <!--
+                                            <af:spacer width="10" height="20" id="s6"/>
+                                            <af:panelLabelAndMessage label="捻度" id="plam13"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol132"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="牵伸倍数" id="plam14"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol142"   partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            <af:panelLabelAndMessage label="前罗拉速度" id="plam15"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol152"   partialTriggers="b1" />
+                                            </af:panelLabelAndMessage>
+                                            
+                                            <af:panelLabelAndMessage label="功率" id="plam16"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol162"  partialTriggers="b1"  />
+                                            </af:panelLabelAndMessage>
+                                            
+                                             <af:panelLabelAndMessage label="锭子平均速度" id="plam17"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol172"   partialTriggers="b1" />
+                                            </af:panelLabelAndMessage>
+                                            <af:spacer width="10" height="10" id="s7"/>
+                                              <af:panelLabelAndMessage label="原料" id="plam18"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol182"   partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                             <af:panelLabelAndMessage label="品种" id="plam19"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol192"   partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="锭子数" id="plam110"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol1102"   partialTriggers="b1" />
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="标准捻度" id="plam111"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol1112" partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                                -->
+                                            
+                                            
+                                            <f:facet name="footer"/>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="80" height="10" id="s5"/>
+                                        <af:panelFormLayout id="pfl4">
+                                        
+                                             <af:panelLabelAndMessage label="机台编号" id="plam20"
+                                                                      inlineStyle="font-size:x-large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.st2.id}" id="ol202" partialTriggers="b1"
+                                                                inlineStyle="font-size:x-large;"/>
+                                            </af:panelLabelAndMessage>
+                                        
+                                        <af:panelLabelAndMessage label="断头数" id="plam21" inlineStyle="font-size:large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.statis2.sumBrokenHeads}" id="ol212"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                             <af:panelLabelAndMessage label="千锭时断头率" id="plam22"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="#{SameShapeComparasion.statis2.maxBrokenEndsPer1000}" id="ol222"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            
+                                            <!--
+                                            <af:spacer width="10" height="20" id="s62"/>
+                                            <af:panelLabelAndMessage label="捻度" id="plam23"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol232"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="牵伸倍数" id="plam24"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol242"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            <af:panelLabelAndMessage label="前罗拉速度" id="plam25"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol252"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                            <af:panelLabelAndMessage label="功率" id="plam26"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol262"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            
+                                             <af:panelLabelAndMessage label="锭子平均速度" id="plam27"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol272"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:spacer width="10" height="10" id="s72"/>
+                                              <af:panelLabelAndMessage label="原料" id="plam28"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol282"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                             <af:panelLabelAndMessage label="品种" id="plam29"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol292"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="锭子数" id="plam210"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol2102"  partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="标准捻度" id="plam211"
+                                                                      inlineStyle="font-size:large;">
+                                                <af:outputLabel value="" id="ol2112"   partialTriggers="b1"/>
+                                            </af:panelLabelAndMessage>
+                                            -->
+                                            
+                                                                     
+                                            <f:facet name="footer"/>
+                                        </af:panelFormLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

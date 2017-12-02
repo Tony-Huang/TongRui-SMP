@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+    <category/>
+    <emptyBrokenStatis totalEmpty="0" totalBroken="0" totalEfficiency="0.0">
+        <data stNO="3" broken="0" spindleSerials=""/>
+    </emptyBrokenStatis>
+    <defectiveSpindle>
+        <data stNO="3" badSpindles="122" creepSpindles="123"/>
+    </defectiveSpindle>
+    <doffTime>
+        <doffBroken>
+            <data stNO="3" doffBrokens="0"/>
+        </doffBroken>
+        <doffTimeConsumption>
+            <data stNO="3" time="0"/>
+        </doffTimeConsumption>
+        <doffCountdown>
+            <data stNO="3" doffEstimate="0"/>
+        </doffCountdown>
+    </doffTime>
+</data>

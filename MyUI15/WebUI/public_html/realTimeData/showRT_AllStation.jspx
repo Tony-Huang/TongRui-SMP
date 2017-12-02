@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.allrt']}" id="d1" >
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb2}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                        
+                         <af:panelGroupLayout  id="out"  layout="vertical">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                            
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:outputLabel value="#{webuiBundle['module.name.allstationrunning']}" id="ol1"
+                                                inlineStyle="font-size:large"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                
+                                 <af:poll id="poll" timeout="300000"
+                                          interval="#{RealTimeData_AllStation.refreshInterval}"
+                                          pollListener="#{RealTimeData_AllStation.refreshData}"/>
+                                          
+                              </af:panelGroupLayout>
+                              
+                            
+                              
+                                <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                   <af:spacer width="5" height="10" id="s3"/>
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                         
+                                        <af:table var="row" rowBandingInterval="1" id="t2" columnStretching="multiple"
+                                                  allDetailsEnabled="true"
+                                                  value="#{RealTimeData_AllStation.stationData}" rowSelection="single"
+                                                  columnSelection="single" partialTriggers=":::poll" width="910">
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.station']}" id="c1" width="50" sortProperty="station.NO">
+                                                <af:outputText value="#{row.station.NO}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.shift']}" id="c2" width="30" sortProperty="shift.name">
+                                                <af:outputText value="#{row.shift.name}" id="ot2"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.instantBrokenHeads']}" id="c3" width="40" sortProperty="instantBrokenHeads">
+                                                <af:outputText value="#{row.instantBrokenHeads}" id="ot3"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.emptySpindle']}" id="c4" width="48" sortProperty="emptySpindles">
+                                                <af:outputText value="#{row.emptySpindles}" id="ot4"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.badSpindles']}" id="c5" width="48" sortProperty="brokenSpindles">
+                                                <af:outputText value="#{row.brokenSpindles}" id="ot5"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.creepSpindle']}" id="c6" width="40" sortProperty="creepSpindles">
+                                                <af:outputText value="#{row.creepSpindles}" id="ot6"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.borkenRatePer1000Spindles']}" id="c7" width="40" sortProperty="brokenEndsPer1000Spindles">
+                                                <af:outputText value="#{row.brokenEndsPer1000Spindles}" id="ot7"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.twist']}" id="c8" width="36" sortProperty="twist">
+                                                <af:outputText value="#{row.twist}" id="ot8"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.frontRollerSpeed']}" id="c9" width="60" sortProperty="frontRollerSpeed">
+                                                <af:outputText value="#{row.frontRollerSpeed}" id="ot9"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.avgSpeed']}" id="c10" width="40" sortProperty="avgSpindleSpeed">
+                                                <af:outputText value="#{row.avgSpindleSpeed}" id="ot10"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.draftTimes']}" id="c11" width="50" sortProperty="draftTimes">
+                                                <af:outputText value="#{row.draftTimes}" id="ot11"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.productionEfficiency']}" id="c12" width="50" sortProperty="productionEfficiency">
+                                                <af:outputText value="#{row.productionEfficiency}" id="ot12"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.realtimeProduction']}" id="c13" width="50" sortProperty="realTimeProduction">
+                                                <af:outputText value="#{row.realTimeProduction}" id="ot13"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.energyConsumptionPerTon']}" id="c14" width="50" sortProperty="eneryKWH">
+                                                <af:outputText value="#{row.eneryKWH}" id="ot14"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.kwh']}" id="c15" width="30" sortProperty="powerKW">
+                                                <af:outputText value="#{row.powerKW}" id="ot15"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.shiftProduction']}" id="c16" width="60" sortProperty="grossProductionByShift">
+                                                <af:outputText value="#{row.grossProductionByShift}" id="ot16"/>
+                                            </af:column>
+                                            <af:column sortable="true" headerText="#{webuiBundle['label.recentDoffTime']}" id="c17" width="100" sortProperty="doffTime">
+                                                <af:outputText value="#{row.doffTime}" id="ot17">
+                                                    <af:convertDateTime pattern="yyyy-MM-dd HH:mm"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <!--af:column sortable="false" headerText="落纱次数" id="c18">
+                                            <af:outputText value="#{row.}" id="ot18"/>
+                                        </af:column-->
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                          
+                           </af:panelGroupLayout>
+                            
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+    <!--oracle-jdev-comment:auto-binding-backing-bean-name:backing_realTimeData_untitled1-->
+</jsp:root>

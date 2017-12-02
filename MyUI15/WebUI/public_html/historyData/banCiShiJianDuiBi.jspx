@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle_zh']}"/>
+   
+    <!--c:set var="webuiBundle" value="#{adfBundle['com.hdp.smp.front.ui.SMPUIBundle']}"/-->
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.shiftcompare']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                                                   
+                            <af:panelGroupLayout id="pgl3" halign="center" layout="vertical">
+                               <af:spacer width="10" height="30" id="s2"/>
+                               <af:outputLabel value="#{webuiBundle['module.name.history.shiftcompare']}" id="ol1" inlineStyle="font-size:large;"/>
+                                <af:spacer width="10" height="20" id="s3"/>
+                                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                    <af:panelBox text="#{webuiBundle['label.shift1cond']}" id="pb1" inlineStyle="font-size:large;">
+                                        <f:facet name="toolbar"/>
+                                        <af:panelFormLayout id="pfl1" rows="1">
+                                            <af:inputText label="#{webuiBundle['label.station']}" id="it1" columns="6"
+                                                          value="#{HistoryData.stationId1}" />
+                                            <af:inputDate label="#{webuiBundle['label.startdate']}" id="id1" value="#{HistoryData.date1_start}"
+                                                          required="false">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            </af:inputDate>
+                                            <af:inputDate label="#{webuiBundle['label.enddate']}" id="id3" value="#{HistoryData.date1_end}"
+                                                          required="false">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            </af:inputDate>
+                                            <af:selectOneChoice label="#{webuiBundle['label.shift1']}" id="soc2" value="#{HistoryData.shift1}"
+                                                                required="false">
+                                                <f:selectItems value="#{HistoryData.selectionShift}" id="si1"/>
+                                            </af:selectOneChoice>
+                                            <f:facet name="footer"/>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                    <af:spacer width="10" height="20" id="s4"/>
+                                    <af:panelBox text="#{webuiBundle['label.shift2cond']}" id="pb2" inlineStyle="font-size:large;">
+                                        <f:facet name="toolbar"/>
+                                        <af:panelFormLayout id="pfl2" rows="1">
+                                            <af:inputText label="#{webuiBundle['label.station']}" id="it2" columns="6"
+                                                          value="#{HistoryData.stationId2}" />
+                                            <af:inputDate label="#{webuiBundle['label.startdate']}" id="id2" value="#{HistoryData.date2_start}"
+                                                          required="false">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            </af:inputDate>
+                                            <af:inputDate label="#{webuiBundle['label.enddate']}" id="id4" value="#{HistoryData.date2_end}"
+                                                          required="false">
+                                                <af:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                            </af:inputDate>
+                                            <af:selectOneChoice label="#{webuiBundle['label.shift2']}" id="soc3" value="#{HistoryData.shift2}"
+                                                                required="false">
+                                                <f:selectItems value="#{HistoryData.selectionShift}" id="si2"/>
+                                            </af:selectOneChoice>
+                                            <f:facet name="footer">
+                                               
+                                            </f:facet>
+                                        </af:panelFormLayout>
+                                    </af:panelBox>
+                                </af:panelGroupLayout>
+                                
+                                <!--buttons  start-->
+                                 <af:panelGroupLayout id="pgl4">
+                                                    <af:spacer width="30" height="30" id="s1"/>
+                                                    <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                                               actionListener="#{HistoryData.doShiftCompare}"/>
+                                                    <af:spacer width="30" height="30" id="s21"/>
+                                                    <af:button text="#{webuiBundle['button.cancel.name']}" id="b2"
+                                                               immediate="true" action="toMain"/>
+                                 </af:panelGroupLayout>
+                                
+                                <!--buttons end-->
+                                
+                                <af:panelCollection id="pc1" inlineStyle="font-size:large;">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{HistoryData.allShiftCompData}" var="row" rowBandingInterval="1"  id="t2"
+                                              partialTriggers=":::b1" inlineStyle="font-size:large;"
+                                              rowSelection="multiple" allDetailsEnabled="true" columnSelection="single"
+                                              columnStretching="multiple">
+                                        <?audit suppress oracle.adf.faces.tableneedsrowheader?>
+                                        <af:column sortable="true" headerText="" id="c1" width="20%" sortProperty="name">
+                                            <af:outputText value="#{row.name}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.shift1']}" id="c2" width="40%" sortProperty="value1">
+                                            <af:outputText value="#{row.value1}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortable="true" headerText="#{webuiBundle['label.shift2']}" id="c3" width="40%"  sortProperty="value2">
+                                            <af:outputText value="#{row.value2}" id="ot3"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

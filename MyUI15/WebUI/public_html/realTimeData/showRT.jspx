@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.rt']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelStretchLayout id="psl1">
+                        <f:facet name="bottom"/>
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+                              <af:spacer width="10" height="10" id="s2"/>
+                                <af:outputLabel value="#{webuiBundle['module.name.stationrunning']}" id="ol1" inlineStyle="font-size:large;"/>
+                                <af:spacer width="10" height="10" id="s6"/>
+                                <af:panelGroupLayout id="g1"    layout="horizontal">
+                                <!-- 选择机台: -->
+                                    <af:inputText label="#{webuiBundle['label.station']}" id="it3" value="#{RealTimeData.stationNO}"
+                                                  inlineStyle="font-size:large;"/>
+                                    <!--af:spacer width="10" height="20" id="s356"/-->
+                                    <af:button text="#{webuiBundle['button.ok.name']}" id="stOk"
+                                               actionListener="#{RealTimeData.startFetchRTdata}"/>
+                                   
+                                </af:panelGroupLayout>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:panelFormLayout id="pfl1" rows="5" fieldWidth="40%" labelWidth="60%"
+                                                    inlineStyle="font-size:large; font-size-adjust:inherit;"
+                                                    maxColumns="4">
+                                  
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.shift']}" id="plam0"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.shiftName}" id="ot0"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.badSpindles']}" id="plam1"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.badSpindles}" id="ot1"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage id="plam2" label="#{webuiBundle['label.twist']}"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.twist}" id="ot2" partialTriggers="poll"
+                                                       inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                  
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.draftTimes']}" id="plam3"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.draftTimes}" id="ot3"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.energyConsumptionPerTon']}" id="plam4"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.eneryConsumptionPerTon}" id="ot4"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.instantBrokenHeads']}" id="plam5"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.instantBrokens}" id="ot5"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.doffBrokenHeads']}" id="plam501"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.doffBrokenHeads}" id="ot501"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.creepSpindle']}" id="plam6"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.creepSpindles}" id="ot6"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.frontRollerSpeed']}" id="plam7"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.frontRollerSpeed}" id="ot7"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.productionEfficiency']}" id="plam8"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.productionEfficiecy}" id="ot8"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.kwh']}" id="plam9"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.energyKW}" id="ot9"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.emptySpindle']}" id="plam10"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.emptySpindles}" id="ot10"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.borkenRatePer1000Spindles']}" id="plam11"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.brokenRatePer1000}" id="ot11"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                    <af:panelLabelAndMessage label="#{webuiBundle['label.accumulatedBrokenHeads']}" id="plam1102"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.accumulatedBrokenHeads}" id="ot1102"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.avgSpeed']}" id="plam12"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.avgSpeed}" id="ot12"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.realtimeProduction']}" id="plam13"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.shiftRealtimeProduction}" id="ot13"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:panelLabelAndMessage label="#{webuiBundle['label.shiftProduction']}" id="plam14"
+                                                              inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.shiftProduction}" id="ot14"
+                                                       partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage>
+                                    
+                                     <af:poll id="poll" pollListener="#{RealTimeData.refreshData}" timeout="300000"
+                                              interval="#{RealTimeData.refreshInterval}"/>
+                                     
+                                    <f:facet name="footer">
+                                        <af:panelGroupLayout id="pgl3" >
+                                          <af:spacer width="10" height="5" id="s44"/>
+                                            <af:panelGroupLayout id="pgl5" layout="horizontal">
+                                            <af:panelLabelAndMessage label="#{webuiBundle['label.recentDoffTime']}" id="plam15"
+                                                                   inlineStyle="font-size:x-large;">
+                                            <af:outputText value="#{RealTimeData.recentDoffTime}" id="ot15"
+                                                           partialTriggers="poll" inlineStyle="font-size:large;">
+                                                    <af:convertDateTime pattern="yyyy-MM-dd HH:mm"/>
+                                                </af:outputText>
+                                         </af:panelLabelAndMessage>
+                                                <af:spacer width="20" height="0" id="s7"/>
+                                                <af:panelLabelAndMessage label="#{webuiBundle['label.costTime']}" id="plam18">
+                                                <af:outputText value="#{RealTimeData.doffTimeConsumption}" id="ot18"   partialTriggers="poll"/>
+                                                <af:outputText value="#{webuiBundle['label.minute']}" id="ot181"   inlineStyle="font-size:small;"/>
+                                                
+                                                </af:panelLabelAndMessage>
+                                            
+                                            </af:panelGroupLayout>
+                                            <af:spacer width="10" height="10" id="s4" rendered="false"/>
+                                            <af:panelLabelAndMessage label="#{webuiBundle['label.warning']}" id="plam16"
+                                                                     inlineStyle="font-size:x-large;"  rendered="false">
+                                            <af:outputText value="#{RealTimeData.warning}" id="ot16"
+                                                           partialTriggers="poll" inlineStyle="font-size:large;"/>
+                                         </af:panelLabelAndMessage>
+                                        </af:panelGroupLayout> 
+                                    </f:facet>
+                                    
+                                </af:panelFormLayout>
+                                <af:spacer width="30" height="5" id="s1"/>
+                                <af:group id="g2">
+                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                       <af:inputText label="#{webuiBundle['label.spindleNO']}" id="it1" columns="10"
+                                                     value="#{RealTimeData.spindleNO}" partialTriggers="spindleOk"
+                                                     inlineStyle="font-size:large;">
+                                            <!--af:validateLongRange minimum="1"/-->
+                                        </af:inputText>
+                                       <af:button text="#{webuiBundle['button.ok.name']}" id="spindleOk"
+                                                  actionListener="#{RealTimeData.readSpindleSpeed}"/>
+                                    </af:panelGroupLayout>
+                                    <af:spacer width="10" height="10" id="s5"/>
+                                    <!--af:panelLabelAndMessage id="plam17" label="#{webuiBundle['label.speed']}"
+                                                             inlineStyle="font-size:large;">
+                                        <af:outputText value="#{RealTimeData.spindleSpeed}" id="ot17"
+                                                       partialTriggers="spindleOk poll" inlineStyle="font-size:large;"/>
+                                    </af:panelLabelAndMessage-->
+                                    <af:panelCollection id="pc1">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                        <af:table var="row" rowBandingInterval="1" id="t2"  width="510"
+                                                  columnSelection="single"
+                                                  value="#{RealTimeData.spindleSpeeds}"
+                                                  partialTriggers=":::spindleOk :::poll">
+                                            <af:column sortable="false" id="c1" width="100">
+                                                <af:outputText value="#{row[0]}" id="ot17"/>
+                                            </af:column>
+                                            <af:column sortable="false"  id="c2"  width="100">
+                                                <af:outputText value="#{row[1]}" id="ot19"/>
+                                            </af:column>
+                                            <af:column sortable="false"  id="c3"  width="100">
+                                                <af:outputText value="#{row[2]}" id="ot20"/>
+                                            </af:column>
+                                            <af:column sortable="false" id="c4"  width="100">
+                                                <af:outputText value="#{row[3]}" id="ot21"/>
+                                            </af:column>
+                                            <af:column sortable="false" id="c5"  width="100">
+                                                <af:outputText value="#{row[4]}" id="ot22"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:group>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="start"/>
+                        <f:facet name="end"/>
+                        <f:facet name="top"/>
+                    </af:panelStretchLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>

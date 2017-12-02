@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.8" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.hdp.smp.front.ui" ClientType="Generic">
+  <pageMap>
+    <page path="/includes/aboutPopup.jspx" usageId="com_hdp_smp_front_ui_aboutPopupPageDef"/>
+    <page path="/templates/templateMain1.jspx" usageId="com_hdp_smp_front_ui_templateMain1PageDef"/>
+    <page path="/templates/templateMain2.jspx" usageId="com_hdp_smp_front_ui_templateMain2PageDef"/>
+    <page path="/login.jspx" usageId="com_hdp_smp_front_ui_loginPageDef"/>
+    <page path="/main.jspx" usageId="com_hdp_smp_front_ui_mainPageDef"/>
+    <page path="/MyTable.jspx" usageId="com_hdp_smp_front_ui_MyTablePageDef"/>
+    <page path="/userprofile.jspx" usageId="com_hdp_smp_front_ui_userprofilePageDef"/>
+    <page path="/SystemSetting.jspx" usageId="com_hdp_smp_front_ui_SystemSettingPageDef"/>
+    <page path="/UserMgt.jspx" usageId="com_hdp_smp_front_ui_UserMgtPageDef"/>
+    <page path="/userMgt/userList.jspx" usageId="com_hdp_smp_front_ui_userListPageDef"/>
+    <page path="/userMgt/newUser.jspx" usageId="com_hdp_smp_front_ui_newUserPageDef"/>
+    <page path="/realTimeData/untitled1.jspx" usageId="com_hdp_smp_front_ui_untitled1PageDef"/>
+    <page path="/historyData/gongYiPinZhongChaJitai.jspx" usageId="com_hdp_smp_front_ui_gongYiPinZhongChaJitaiPageDef"/>
+    <page path="/historyData/banCiShiJianDuiBi.jspx" usageId="com_hdp_smp_front_ui_banCiShiJianDuiBiPageDef"/>
+    <page path="/historyData/buTongJiTaiShuJuDuiBi.jspx" usageId="com_hdp_smp_front_ui_buTongJiTaiShuJuDuiBiPageDef"/>
+    <page path="/systemSetting/craftCode.jspx" usageId="com_hdp_smp_front_ui_craftCodePageDef"/>
+    <page path="/systemSetting/materialCode.jspx" usageId="com_hdp_smp_front_ui_materialCodePageDef"/>
+    <page path="/systemSetting/craftParamSetting.jspx" usageId="com_hdp_smp_front_ui_craftParamSettingPageDef"/>
+    <page path="/historyData/jiTaiShiJianDuanTongJi.jspx" usageId="com_hdp_smp_front_ui_jiTaiShiJianDuanTongJiPageDef"/>
+    <page path="/historyData/suoYouJiTaiTongJi.jspx" usageId="com_hdp_smp_front_ui_suoYouJiTaiTongJiPageDef"/>
+    <page path="/historyData/shaXingDuanJiTaiDuanTouLv.jspx"
+          usageId="com_hdp_smp_front_ui_shaXingDuanJiTaiDuanTouLvPageDef"/>
+    <page path="/systemSetting/newMonitor.jspx" usageId="com_hdp_smp_front_ui_newMonitorPageDef"/>
+    <page path="/systemSetting/browseMonitors.jspx" usageId="com_hdp_smp_front_ui_browseMonitorsPageDef"/>
+    <page path="/systemSetting/newCat.jspx" usageId="com_hdp_smp_front_ui_newCatPageDef"/>
+    <page path="/systemSetting/newMat.jspx" usageId="com_hdp_smp_front_ui_newMatPageDef"/>
+    <page path="/systemSetting/MyDebug.jspx" usageId="com_hdp_smp_front_ui_MyDebugPageDef"/>
+    <page path="/bigScreen/bigScreenConfig.jspx" usageId="com_hdp_smp_front_ui_bigScreenConfigPageDef"/>
+    <page path="/bigScreen/test1.jspx" usageId="com_hdp_smp_front_ui_test1PageDef"/>
+    <page path="/bigScreen/newBigScreen.jspx" usageId="com_hdp_smp_front_ui_newBigScreenPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_hdp_smp_front_ui_aboutPopupPageDef" path="includes.aboutPopupPageDef"/>
+    <page id="com_hdp_smp_front_ui_templateMain1PageDef" path="templates.templateMain1PageDef"/>
+    <page id="com_hdp_smp_front_ui_templateMain2PageDef" path="templates.templateMain2PageDef"/>
+    <page id="com_hdp_smp_front_ui_loginPageDef" path="com.hdp.smp.front.ui.pageDefs.loginPageDef"/>
+    <page id="com_hdp_smp_front_ui_mainPageDef" path="com.hdp.smp.front.ui.pageDefs.mainPageDef"/>
+    <page id="com_hdp_smp_front_ui_MyTablePageDef" path="com.hdp.smp.front.ui.pageDefs.MyTablePageDef"/>
+    <page id="com_hdp_smp_front_ui_userprofilePageDef" path="com.hdp.smp.front.ui.pageDefs.userprofilePageDef"/>
+    <page id="com_hdp_smp_front_ui_SystemSettingPageDef" path="com.hdp.smp.front.ui.pageDefs.SystemSettingPageDef"/>
+    <page id="com_hdp_smp_front_ui_UserMgtPageDef" path="com.hdp.smp.front.ui.pageDefs.UserMgtPageDef"/>
+    <page id="com_hdp_smp_front_ui_userListPageDef" path="userMgt.userListPageDef"/>
+    <page id="com_hdp_smp_front_ui_newUserPageDef" path="userMgt.newUserPageDef"/>
+    <page id="com_hdp_smp_front_ui_untitled1PageDef" path="realTimeData.untitled1PageDef"/>
+    <page id="com_hdp_smp_front_ui_gongYiPinZhongChaJitaiPageDef" path="historyData.gongYiPinZhongChaJitaiPageDef"/>
+    <page id="com_hdp_smp_front_ui_banCiShiJianDuiBiPageDef" path="historyData.banCiShiJianDuiBiPageDef"/>
+    <page id="com_hdp_smp_front_ui_buTongJiTaiShuJuDuiBiPageDef" path="historyData.buTongJiTaiShuJuDuiBiPageDef"/>
+    <page id="com_hdp_smp_front_ui_craftCodePageDef" path="systemSetting.craftCodePageDef"/>
+    <page id="com_hdp_smp_front_ui_materialCodePageDef" path="systemSetting.materialCodePageDef"/>
+    <page id="com_hdp_smp_front_ui_craftParamSettingPageDef" path="systemSetting.craftParamSettingPageDef"/>
+    <page id="com_hdp_smp_front_ui_jiTaiShiJianDuanTongJiPageDef" path="historyData.jiTaiShiJianDuanTongJiPageDef"/>
+    <page id="com_hdp_smp_front_ui_suoYouJiTaiTongJiPageDef" path="historyData.suoYouJiTaiTongJiPageDef"/>
+    <page id="com_hdp_smp_front_ui_shaXingDuanJiTaiDuanTouLvPageDef"
+          path="historyData.shaXingDuanJiTaiDuanTouLvPageDef"/>
+    <page id="com_hdp_smp_front_ui_newMonitorPageDef" path="systemSetting.newMonitorPageDef"/>
+    <page id="com_hdp_smp_front_ui_browseMonitorsPageDef" path="systemSetting.browseMonitorsPageDef"/>
+    <page id="com_hdp_smp_front_ui_newCatPageDef" path="systemSetting.newCatPageDef"/>
+    <page id="com_hdp_smp_front_ui_newMatPageDef" path="systemSetting.newMatPageDef"/>
+    <page id="com_hdp_smp_front_ui_MyDebugPageDef" path="systemSetting.MyDebugPageDef"/>
+    <page id="com_hdp_smp_front_ui_bigScreenConfigPageDef" path="bigScreen.bigScreenConfigPageDef"/>
+    <page id="com_hdp_smp_front_ui_test1PageDef" path="bigScreen.test1PageDef"/>
+    <page id="com_hdp_smp_front_ui_newBigScreenPageDef" path="bigScreen.newBigScreenPageDef"/>
+  </pageDefinitionUsages>
+</Application>

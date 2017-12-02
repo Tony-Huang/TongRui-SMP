@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="#{webuiBundle['page.title.profile']}" id="d1">
+            <af:pageTemplate viewId="/templates/templateMain1.jspx" value="#{bindings.ptb1}" id="pt1">
+                <f:facet name="center1">
+                    <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center">
+                        <af:panelFormLayout id="pfl1">
+                            <af:spacer width="10" height="50" id="s1"/>
+                            <af:panelLabelAndMessage label="#{webuiBundle['login.username']}" id="plam1">
+                                <af:outputLabel value="#{UserProfile.username}" id="ol1"/>
+                            </af:panelLabelAndMessage>
+                            <af:inputText label="#{webuiBundle['user.profile.passwd.change']}" id="it1"
+                                          value="#{UserProfile.newPassword}" required="true" secret="true"/>
+                            <af:inputText id="it2" label="#{webuiBundle['user.profile.passwd.confirm']}"
+                                          value="#{UserProfile.confirmPassword}" required="true"  secret="true"/>
+                             <af:spacer width="30" height="30" id="s2"/>
+                            <f:facet name="footer">
+                                <af:panelGroupLayout id="pgl3" layout="horizontal" halign="center">
+                                  <af:spacer width="30" height="2" id="s3"/>
+                                  <af:button text="#{webuiBundle['button.ok.name']}" id="b1"
+                                             action="#{UserProfile.changePwd}"/>
+                                  <af:spacer width="20" height="2" id="s4"/>
+                                  <af:button text="#{webuiBundle['button.cancel.name']}" id="b2" action="back"  immediate="true"/>
+                                </af:panelGroupLayout>
+                               
+                                <!--af:group id="g1">
+                                 
+                                </af:group-->
+                               
+                            </f:facet>
+                        </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="center2"/>
+            </af:pageTemplate>
+        </af:document>
+    </f:view>
+</jsp:root>
